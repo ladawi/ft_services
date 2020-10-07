@@ -4,3 +4,4 @@ secretGenerator:
   - password=admin
 resources:
 - nginx.yaml
+- metallb-config.yaml

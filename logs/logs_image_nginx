@@ -1,0 +1,38 @@
+Sending build context to Docker daemon  9.728kB
+Step 1/12 : FROM alpine:3.11.3
+ ---> e7d92cdc71fe
+Step 2/12 : COPY ./init.sh .
+ ---> Using cache
+ ---> 306942326533
+Step 3/12 : RUN apk update && apk upgrade
+ ---> Using cache
+ ---> 7042fd7fd44b
+Step 4/12 : RUN apk add nginx
+ ---> Using cache
+ ---> 838f78fd5574
+Step 5/12 : RUN apk add bash
+ ---> Using cache
+ ---> 84b40d699f2f
+Step 6/12 : RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/share/nginx/html
+ ---> Using cache
+ ---> a8823604d4aa
+Step 7/12 : COPY ./default.conf /etc/nginx/conf.d/.
+ ---> Using cache
+ ---> 6a40b17f4326
+Step 8/12 : COPY index.html /usr/share/nginx/html/.
+ ---> Using cache
+ ---> ebc7a8e1dcfc
+Step 9/12 : COPY ssl_keys/ca.crt /etc/ssl/certs/ca.crt
+ ---> Using cache
+ ---> 177fa5b8f2a1
+Step 10/12 : COPY ssl_keys/ca.key /etc/ssl/private/ca.key
+ ---> Using cache
+ ---> d108d3b3ae75
+Step 11/12 : EXPOSE 80 443
+ ---> Using cache
+ ---> 135eb6c8ddb4
+Step 12/12 : ENTRYPOINT ["sh", "init.sh"]
+ ---> Using cache
+ ---> 23f812a81b84
+Successfully built 23f812a81b84
+Successfully tagged nginx:latest
