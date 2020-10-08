@@ -1,0 +1,32 @@
+Sending build context to Docker daemon  4.608kB
+Step 1/10 : FROM alpine:3.11.3
+ ---> e7d92cdc71fe
+Step 2/10 : COPY init.sh .
+ ---> Using cache
+ ---> 530aab928bbc
+Step 3/10 : RUN apk add --update mysql mysql-client
+ ---> Using cache
+ ---> 67287e90202e
+Step 4/10 : RUN mkdir app
+ ---> Using cache
+ ---> 62ec2c9e1f71
+Step 5/10 : RUN mkdir app/mysql
+ ---> Using cache
+ ---> db915cb31e4e
+Step 6/10 : RUN mkdir auth_pam_tool_dir && mkdir auth_pam_tool_dir/auth_pam_tool
+ ---> Using cache
+ ---> 19a8fae8b51c
+Step 7/10 : COPY my.cnf /etc/mysql/my.cnf
+ ---> Using cache
+ ---> 3ac298d5915d
+Step 8/10 : COPY my.cnf /etc/my.cnf
+ ---> Using cache
+ ---> 5f77d4ef7edd
+Step 9/10 : EXPOSE 3306
+ ---> Using cache
+ ---> 28d87bbc3400
+Step 10/10 : ENTRYPOINT ["sh", "init.sh"]
+ ---> Using cache
+ ---> b87fdd1826c5
+Successfully built b87fdd1826c5
+Successfully tagged mysql:latest

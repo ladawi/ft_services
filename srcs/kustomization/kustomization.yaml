@@ -5,3 +5,5 @@ secretGenerator:
 resources:
 - nginx.yaml
 - metallb-config.yaml
+- wordpress.yaml
+- mysql.yaml

@@ -1,0 +1,53 @@
+Sending build context to Docker daemon  13.31kB
+Step 1/17 : FROM alpine:3.11.3
+ ---> e7d92cdc71fe
+Step 2/17 : COPY ./init.sh .
+ ---> Using cache
+ ---> 020aaf6c77fc
+Step 3/17 : RUN apk update && apk upgrade
+ ---> Using cache
+ ---> 300717767e5d
+Step 4/17 : RUN apk -f add nginx wget mariadb-server mysql-client mysql-server wget busybox busybox-extras
+ ---> Using cache
+ ---> 771358f74320
+Step 5/17 : RUN apk -f add php7-fpm php7-mbstring php7-session php7-mysqli php7-gettext 	php7-pdo php7-zip php7-sqlite3 php7-apcu php7-pdo_pgsql php7-bcmath php7-gd php7-odbc 	php7-pdo_mysql php7-pdo_sqlite php7-xmlreader php7-xmlrpc php7-bz2 php7-iconv php7-pdo_dblib 	php7-curl php7-ctype php7-mcrypt php7-soap php7-openssl php7-gmp php7-pdo_odbc php7-json php7-dom php-mysql
+ ---> Using cache
+ ---> 41293d30ec9c
+Step 6/17 : COPY ./nginx.conf /etc/nginx/conf.d/.
+ ---> Using cache
+ ---> 6a5a219cd395
+Step 7/17 : RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/share/nginx/html
+ ---> Using cache
+ ---> f67bd00eff2b
+Step 8/17 : RUN wget -c http://wordpress.org/latest.tar.gz && tar -xzvf latest.tar.gz
+ ---> Using cache
+ ---> ea5683bab344
+Step 9/17 : RUN mkdir -p /var/www/html/localhost
+ ---> Using cache
+ ---> 9dc65c8c2a54
+Step 10/17 : RUN mv wordpress /var/www/html/localhost
+ ---> Using cache
+ ---> 5fc8ff484898
+Step 11/17 : RUN chown -R 777 /var/www/html/localhost
+ ---> Using cache
+ ---> 5a00fbc90e32
+Step 12/17 : COPY wp-config.php /var/www/html/localhost/wp-config.php
+ ---> Using cache
+ ---> 1f4cffedf62d
+Step 13/17 : RUN mkdir /root/mkcert
+ ---> Using cache
+ ---> 81192734d3b1
+Step 14/17 : COPY ssl_keys/ca.crt /root/mkcert/ca.crt
+ ---> Using cache
+ ---> 3092d145ade3
+Step 15/17 : COPY ssl_keys/ca.key /root/mkcert/ca.key
+ ---> Using cache
+ ---> cf17ada9e9e1
+Step 16/17 : EXPOSE 5050 80 9000
+ ---> Using cache
+ ---> 77a47938e1e7
+Step 17/17 : ENTRYPOINT ["sh", "init.sh"]
+ ---> Using cache
+ ---> f1bb20a54294
+Successfully built f1bb20a54294
+Successfully tagged wordpress:latest
