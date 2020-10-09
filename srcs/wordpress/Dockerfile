@@ -23,6 +23,6 @@ RUN mkdir /root/mkcert
 COPY ssl_keys/ca.crt /root/mkcert/ca.crt
 COPY ssl_keys/ca.key /root/mkcert/ca.key
 
-EXPOSE 5050 80 9000
+EXPOSE 5050
 
 ENTRYPOINT ["sh", "init.sh"]

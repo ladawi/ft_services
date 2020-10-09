@@ -20,19 +20,18 @@ Step 7/12 : COPY ./default.conf /etc/nginx/conf.d/.
  ---> Using cache
  ---> 6a40b17f4326
 Step 8/12 : COPY index.html /usr/share/nginx/html/.
- ---> Using cache
- ---> ebc7a8e1dcfc
+ ---> 3ea0d5e3e147
 Step 9/12 : COPY ssl_keys/ca.crt /etc/ssl/certs/ca.crt
- ---> Using cache
- ---> 177fa5b8f2a1
+ ---> 17832b395eb8
 Step 10/12 : COPY ssl_keys/ca.key /etc/ssl/private/ca.key
- ---> Using cache
- ---> d108d3b3ae75
+ ---> da9a726d3bd2
 Step 11/12 : EXPOSE 80 443
- ---> Using cache
- ---> 135eb6c8ddb4
+ ---> Running in 0d5c2c24527f
+Removing intermediate container 0d5c2c24527f
+ ---> 7ec76769fa89
 Step 12/12 : ENTRYPOINT ["sh", "init.sh"]
- ---> Using cache
- ---> 23f812a81b84
-Successfully built 23f812a81b84
+ ---> Running in 3f5ab6af768b
+Removing intermediate container 3f5ab6af768b
+ ---> 65184ef71460
+Successfully built 65184ef71460
 Successfully tagged nginx:latest

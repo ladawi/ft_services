@@ -7,3 +7,4 @@ resources:
 - metallb-config.yaml
 - wordpress.yaml
 - mysql.yaml
+- phpmyadmin.yaml
