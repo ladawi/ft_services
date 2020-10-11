@@ -3,8 +3,8 @@ secretGenerator:
   literals:
   - password=admin
 resources:
+- mysql.yaml
 - nginx.yaml
 - metallb-config.yaml
 - wordpress.yaml
-- mysql.yaml
 - phpmyadmin.yaml
