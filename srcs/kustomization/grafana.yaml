@@ -1,49 +1,49 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress
+  name: grafana
   labels:
-    app: wordpress
+    app: grafana
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: wordpress
+      app: grafana
   template:
     metadata:
       labels:
-        app: wordpress
+        app: grafana
     spec:
       containers:
-      - image: wordpress
+      - image: grafana
         imagePullPolicy: Never
-        name: wordpress
+        name: grafana
         env:
-        - name: WORDPRESS_DB_HOST
+        - name: GRAFANA_DB_HOST
           value: mysql
-        - name: WORDPRESS_DB_USER
+        - name: GRAFANA_DB_USER
           value: root
-        - name: WORDPRESS_DB_PASSWORD
+        - name: GRAFANA_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mysql-pass
               key: password
         ports:
           - containerPort: 5050
-            name: wordpress
+            name: grafana
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: wordpress
+  name: grafana
   labels:
-    run: wordpress
+    run: grafana
 spec:
   type: LoadBalancer
   ports:
-  - port: 5050
-    targetPort: 5050
+  - port: 3000
+    targetPort: 3000
     protocol: TCP
     name: http
   selector:
-    app: wordpress
+    app: grafana

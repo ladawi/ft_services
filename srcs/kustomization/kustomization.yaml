@@ -4,7 +4,9 @@ secretGenerator:
   - password=admin
 resources:
 - mysql.yaml
+- influxdb.yaml
 - nginx.yaml
+- grafana.yaml
 - metallb-config.yaml
 - wordpress.yaml
 - phpmyadmin.yaml

@@ -4,8 +4,7 @@ COPY init.sh .
 
 RUN apk add --update mysql mysql-client
 
-RUN mkdir app
-RUN mkdir app/mysql
+RUN mkdir -p app/mysql
 RUN mkdir auth_pam_tool_dir && mkdir auth_pam_tool_dir/auth_pam_tool
 
 COPY my.cnf /etc/mysql/my.cnf

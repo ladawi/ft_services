@@ -1,0 +1,24 @@
+Sending build context to Docker daemon  32.77kB
+Step 1/7 : FROM alpine:3.11.3
+ ---> e7d92cdc71fe
+Step 2/7 : RUN apk -f upgrade && apk -f update
+ ---> Using cache
+ ---> caaa71527e5c
+Step 3/7 : RUN apk add openrc musl busybox
+ ---> Using cache
+ ---> 804da0960fc2
+Step 4/7 : RUN apk add grafana --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing
+ ---> Using cache
+ ---> 97925f126e02
+Step 5/7 : COPY ./grafana.sh .
+ ---> 5825fc13db8a
+Step 6/7 : EXPOSE 3000
+ ---> Running in e7aaf38122af
+Removing intermediate container e7aaf38122af
+ ---> e004d60e64f5
+Step 7/7 : ENTRYPOINT ["sh", "grafana.sh"]
+ ---> Running in eb53b7db42ac
+Removing intermediate container eb53b7db42ac
+ ---> 1932136fb758
+Successfully built 1932136fb758
+Successfully tagged grafana:latest

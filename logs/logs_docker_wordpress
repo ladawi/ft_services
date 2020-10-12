@@ -3,51 +3,51 @@ Step 1/17 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
 Step 2/17 : COPY ./init.sh .
  ---> Using cache
- ---> e12a090d66ac
+ ---> 772ad4af98db
 Step 3/17 : RUN apk update && apk upgrade
  ---> Using cache
- ---> bbace3f00c90
+ ---> 12bceeb1a70d
 Step 4/17 : RUN apk -f add nginx wget mariadb-server mysql-client mysql-server wget busybox busybox-extras
  ---> Using cache
- ---> cc98ab91c718
+ ---> cb4ad66edb06
 Step 5/17 : RUN apk -f add php7-fpm php7-mbstring php7-session php7-mysqli php7-gettext 	php7-pdo php7-zip php7-sqlite3 php7-apcu php7-pdo_pgsql php7-bcmath php7-gd php7-odbc 	php7-pdo_mysql php7-pdo_sqlite php7-xmlreader php7-xmlrpc php7-bz2 php7-iconv php7-pdo_dblib 	php7-curl php7-ctype php7-mcrypt php7-soap php7-openssl php7-gmp php7-pdo_odbc php7-json php7-dom php-mysql
  ---> Using cache
- ---> 7ea2af7a5e2d
+ ---> 62104106f8ff
 Step 6/17 : COPY ./nginx.conf /etc/nginx/conf.d/.
  ---> Using cache
- ---> 05347048bedc
+ ---> 1ae7805fe626
 Step 7/17 : RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/share/nginx/html
  ---> Using cache
- ---> e3e6147e12bf
+ ---> 44da4d9fa9b3
 Step 8/17 : RUN wget -c http://wordpress.org/latest.tar.gz && tar -xzvf latest.tar.gz
  ---> Using cache
- ---> 951a03a9762a
+ ---> 9ff6bfef8515
 Step 9/17 : RUN mkdir -p /var/www/html/localhost
  ---> Using cache
- ---> a96894007b48
+ ---> 6132153b6c01
 Step 10/17 : RUN mv wordpress /var/www/html/localhost
  ---> Using cache
- ---> f0b0689ac12b
+ ---> 47868596959f
 Step 11/17 : RUN chown -R 777 /var/www/html/localhost
  ---> Using cache
- ---> 5636c28481f8
+ ---> 1a1c655cf444
 Step 12/17 : COPY wp-config.php /var/www/html/localhost/wp-config.php
  ---> Using cache
- ---> d9aedcff9e5e
+ ---> e4dc79d6307e
 Step 13/17 : RUN mkdir /root/mkcert
  ---> Using cache
- ---> 48207e31add3
+ ---> 20908c21fd4f
 Step 14/17 : COPY ssl_keys/ca.crt /root/mkcert/ca.crt
  ---> Using cache
- ---> 78e130237ac6
+ ---> 16774c919b1f
 Step 15/17 : COPY ssl_keys/ca.key /root/mkcert/ca.key
  ---> Using cache
- ---> da2069bfb163
+ ---> 51aba7ffc910
 Step 16/17 : EXPOSE 5050
  ---> Using cache
- ---> 9d7834dd9bb7
+ ---> b0ccd5b52e5c
 Step 17/17 : ENTRYPOINT ["sh", "init.sh"]
  ---> Using cache
- ---> 0dac97cb9b79
-Successfully built 0dac97cb9b79
+ ---> a0c65efa5429
+Successfully built a0c65efa5429
 Successfully tagged wordpress:latest

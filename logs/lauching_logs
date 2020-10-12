@@ -5,15 +5,5 @@
 * Préparation de Kubernetes v1.19.2 sur Docker 19.03.8...
 X Unable to push cached images: images: read: decode /home/user42/.minikube/config/config.json: EOF
 * Verifying Kubernetes components...
-! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 18.75839551s
-! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 18.765942116s
-* Restarting the docker service may improve performance.
-* Restarting the docker service may improve performance.
-! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 18.767802991s
-* Restarting the docker service may improve performance.
-! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 18.767348059s
-* Restarting the docker service may improve performance.
-! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 5.024871911s
-* Restarting the docker service may improve performance.
 * Enabled addons: dashboard, default-storageclass, metallb, storage-provisioner
 * Done! kubectl is now configured to use "minikube" by default

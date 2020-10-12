@@ -20,6 +20,6 @@ COPY ./config.inc.php /var/www/html/localhost/phpmyadmin/
 RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/share/nginx/html
 COPY ./default.conf /etc/nginx/conf.d/.
 
-EXPOSE 5000 80
+EXPOSE 5000
 
 ENTRYPOINT ["sh", "init.sh"]

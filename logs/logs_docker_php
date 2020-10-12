@@ -31,11 +31,11 @@ Step 10/13 : RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr
 Step 11/13 : COPY ./default.conf /etc/nginx/conf.d/.
  ---> Using cache
  ---> ee6e230e84b8
-Step 12/13 : EXPOSE 5000 80
+Step 12/13 : EXPOSE 5000
  ---> Using cache
- ---> 3e90a42e558d
+ ---> 1b45cff92d91
 Step 13/13 : ENTRYPOINT ["sh", "init.sh"]
  ---> Using cache
- ---> 10723245e035
-Successfully built 10723245e035
+ ---> 278d1e01f232
+Successfully built 278d1e01f232
 Successfully tagged php:latest

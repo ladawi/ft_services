@@ -16,7 +16,7 @@ redbckgrnd='\033[48;5;160m'
 bold='\e[1m'
 underline='\e[4m'
 DRIVER=docker
-
+EVAL='FALSE'
 
 wait()
 {
@@ -91,15 +91,10 @@ prune()
 
 build()
 {
-    if [ "$1" != "all" ]; then
-        case $2 in
-                "out")
-                        echo -e "$bold Building images ${underline}outside${neutre} ${bold}Minikube $neutre"
-                        ;;
-                *)
-                        eval $(minikube -p minikube docker-env) > /dev/null
-                        echo -e "$bold Building images ${underline}in${neutre} ${bold}Minikube $neutre"
-        esac
+    if [ "$EVAL" != "DONE" ]; then
+        echo -e "${purple}${bold} "'eval $(minikube -p minikube docker-env)'" -> done ✔$neutre"
+        eval $(minikube -p minikube docker-env) > /dev/null
+        EVAL='DONE';
     fi
     case $1 in
             "nginx")
@@ -126,14 +121,27 @@ build()
                     wait 5
                     echo -e "$green Phpmyadmin image ✔ $neutre"
                     ;;
+            "grafana")
+                    echo -e "$yellow Building Grafana image ... $neutre"
+                    docker build -t grafana srcs/grafana/. > ./logs/logs_docker_grafana &
+                    wait 5
+                    echo -e "$green Grafana image ✔ $neutre"
+                    ;;
+            "influxdb")
+                    echo -e "$yellow Building Influxdb image ... $neutre"
+                    docker build -t influxdb srcs/influxdb/. > ./logs/logs_docker_influxdb &
+                    wait 5
+                    echo -e "$green Influxdb image ✔ $neutre"
+                    ;;
             *)
-                    build nginx $2
-                    build wordpress $2
-                    build mysql $2
-                    build php $2
+                    build nginx 
+                    build wordpress 
+                    build mysql 
+                    build php 
+                    build grafana 
+                    build influxdb 
                     ;;
     esac
-
 }
 
 delete()
@@ -155,11 +163,21 @@ delete()
                     kubectl delete -f srcs/kustomization/phpmyadmin.yaml &> /dev/null
                     echo -e "$red ${bold}Phpmyadmin.yaml deleted in Minikube ✗$neutre"
                     ;;
+            "grafana")
+                    kubectl delete -f srcs/kustomization/grafana.yaml &> /dev/null
+                    echo -e "$red ${bold}Grafana.yaml deleted in Minikube ✗$neutre"
+                    ;;
+            "influxdb")
+                    kubectl delete -f srcs/kustomization/influxdb.yaml &> /dev/null
+                    echo -e "$red ${bold}Influxdb.yaml deleted in Minikube ✗$neutre"
+                    ;;
             *)
                     delete nginx
                     delete wordpress
                     delete mysql
                     delete php
+                    delete grafana
+                    delete grafana
                     ;;
     esac
 }
@@ -169,17 +187,20 @@ if [ "$1" = "start" ]; then
     start;
 elif [ "$1" = "stop" ]; then
     stop;
+elif [ "$1" = "restart" ]; then
+    stop
+    start;
 elif [ "$1" = "prune" ]; then
     prune;
 elif [ "$1" = "build" ]; then
-    build $2 $3;
+    build $2;
 elif [ "$1" = "del" ]; then
     delete $2;
 elif [ "$1" = "apply" ]; then
     apply;
 elif [ "$1" = "update" ]; then
     delete $2
-    build $2 $3
+    build $2
     apply;
 elif [ !$1 ]; then
     /bin/echo -e "muk";
