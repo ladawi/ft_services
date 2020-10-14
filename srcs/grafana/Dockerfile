@@ -5,5 +5,6 @@ RUN apk add openrc musl busybox
 RUN apk add grafana --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 COPY ./grafana.sh .
+COPY default.ini /etc/default.ini
 EXPOSE 3000
 ENTRYPOINT ["sh", "grafana.sh"]

@@ -18,6 +18,8 @@ underline='\e[4m'
 DRIVER=docker
 EVAL='FALSE'
 
+set -e
+
 wait()
 {
     pid=$!
@@ -182,26 +184,50 @@ delete()
     esac
 }
 
+set +e
 
-if [ "$1" = "start" ]; then
-    start;
-elif [ "$1" = "stop" ]; then
-    stop;
-elif [ "$1" = "restart" ]; then
-    stop
-    start;
-elif [ "$1" = "prune" ]; then
-    prune;
-elif [ "$1" = "build" ]; then
-    build $2;
-elif [ "$1" = "del" ]; then
-    delete $2;
-elif [ "$1" = "apply" ]; then
-    apply;
-elif [ "$1" = "update" ]; then
-    delete $2
-    build $2
-    apply;
-elif [ !$1 ]; then
-    /bin/echo -e "muk";
-fi
+main ()
+{
+    case $1 in 
+            "start")
+                    start
+                    ;;
+            "stop")
+                    stop
+                    ;;
+            "restart")
+                    stop
+                    start
+                    main update all
+                    ;;
+            "prune")
+                    prune
+                    ;;
+            "build")
+                    build $2
+                    ;;
+            "del")
+                    delete $2
+                    ;;
+            "apply")
+                    apply
+                    ;;
+            "update")
+                    delete $2
+                    build $2
+                    apply
+                    ;;
+            *)
+                echo -e "List of commands :"
+                echo -e "-- start"
+                echo -e "-- stop"
+                echo -e "-- restart"
+                echo -e "-- prune"
+                echo -e "-- build"
+                echo -e '-- del $2'
+                echo -e "-- apply"
+                echo -e '-- update $2'
+    esac
+}
+
+main $1 $2

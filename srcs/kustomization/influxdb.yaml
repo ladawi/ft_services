@@ -8,6 +8,7 @@ spec:
   clusterIP: None
   ports:
   - port: 8806
+    targetPort: 8806
   selector:
     app: ft_services
     tier: influxdb
