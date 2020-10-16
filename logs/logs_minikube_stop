@@ -1,18 +1,4 @@
 * Stopping node "minikube"  ...
-* Stopping node "minikube"  ...
-* Stopping node "minikube"  ...
-* Stopping node "minikube"  ...
-* Stopping node "minikube"  ...
-* Stopping node "minikube"  ...
-
-X Exiting due to GUEST_STOP_TIMEOUT: docker container inspect minikube --format=: exit status 1
-stdout:
-
-
-stderr:
-Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
-
-* 
-* If the above advice does not help, please let us know: 
-  - https://github.com/kubernetes/minikube/issues/new/choose
-
+! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 5.975004892s
+* Restarting the docker service may improve performance.
+! La machine "minikube n'existe pas, rien a arrêter

@@ -1,0 +1,2 @@
+echo "telegraph .."
+telegraf

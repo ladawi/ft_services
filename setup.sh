@@ -51,13 +51,16 @@ apply()
     kubectl apply -k srcs/kustomization &> ./logs/kubectl_apply &
     wait 5
     echo -e "$green Kustomization file ✔ $neutre"
+#     echo -e "$yellow Apply metrics-server ... $neutre"
+#     kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.7/components.yaml &>> ./logs/kubectl_apply &
+#     wait 5
+#     echo -e "$green Apply metrics-server ✔ $neutre"
 }
 
 start()
 {
     echo -e "$yellow Docker ... $neutre"
-    sudo service docker start &
-    wait 2
+    sudo service docker start
     echo -e "$green Docker ✔ $neutre"
     minikube start --driver=$DRIVER &> logs/lauching_logs &
     echo -e "$yellow Minikube ... $neutre"
@@ -67,6 +70,10 @@ start()
     echo -e "$yellow metallb ... $neutre"
     wait 5
     echo -e "$green Metallb ✔ $neutre"
+    minikube addons enable metrics-server > logs/logs_metrics-server &
+    echo -e "$yellow Metrics-server ... $neutre"
+    wait 5
+    echo -e "$green Metrics-server ✔ $neutre"
     minikube dashboard &> logs/logs_dashboard &
     echo -e "$yellow Dashboard ... $neutre"
     echo -e "$green Dashboard Running ... $neutre"
@@ -75,11 +82,14 @@ start()
 stop()
 {
     sudo service docker stop
+    wait 5
     echo -e "$redbckgrnd ${bold}Docker stopped 💀$neutre"
     sudo service nginx stop
+    wait 5
     echo -e "$redbckgrnd ${bold}nginx stopped 💀$neutre"
     minikube stop &> logs/logs_minikube_stop &
-    wait 4
+    minikube delete &> logs/logs_minikube_del &
+    wait 15
     echo -e "$redbckgrnd ${bold}Minikube stopped 💀$neutre"
 }
 
@@ -95,43 +105,43 @@ build()
 {
     if [ "$EVAL" != "DONE" ]; then
         echo -e "${purple}${bold} "'eval $(minikube -p minikube docker-env)'" -> done ✔$neutre"
-        eval $(minikube -p minikube docker-env) > /dev/null
+        eval $(minikube -p minikube docker-env) &> /dev/null
         EVAL='DONE';
     fi
     case $1 in
             "nginx")
                     echo -e "$yellow Building Nginx image ... $neutre"
-                    docker build -t nginx srcs/nginx/. > ./logs/logs_docker_nginx &
+                    docker build -t nginx srcs/nginx/. > ./logs/dockers_logs/logs_docker_nginx &
                     wait 5
                     echo -e "$green Nginx image ✔ $neutre"
                     ;;
             "wordpress")
                     echo -e "$yellow Building Wordpress image ... $neutre"
-                    docker build -t wordpress srcs/wordpress/. > ./logs/logs_docker_wordpress &
+                    docker build -t wordpress srcs/wordpress/. > ./logs/dockers_logs/logs_docker_wordpress &
                     wait 5
                     echo -e "$green Wordpress image ✔ $neutre"
                     ;;
             "mysql")
                     echo -e "$yellow Building Mysql image ... $neutre"
-                    docker build -t mysql srcs/mysql/. > ./logs/logs_docker_mysql &
+                    docker build -t mysql srcs/mysql/. > ./logs/dockers_logs/logs_docker_mysql &
                     wait 5
                     echo -e "$green Mysql image ✔ $neutre"
                     ;;
             "php")
                     echo -e "$yellow Building Phpmyadmin image ... $neutre"
-                    docker build -t php srcs/phpmyadmin/. > ./logs/logs_docker_php &
+                    docker build -t php srcs/phpmyadmin/. > ./logs/dockers_logs/logs_docker_php &
                     wait 5
                     echo -e "$green Phpmyadmin image ✔ $neutre"
                     ;;
             "grafana")
                     echo -e "$yellow Building Grafana image ... $neutre"
-                    docker build -t grafana srcs/grafana/. > ./logs/logs_docker_grafana &
+                    docker build -t grafana srcs/grafana/. > ./logs/dockers_logs/logs_docker_grafana &
                     wait 5
                     echo -e "$green Grafana image ✔ $neutre"
                     ;;
             "influxdb")
                     echo -e "$yellow Building Influxdb image ... $neutre"
-                    docker build -t influxdb srcs/influxdb/. > ./logs/logs_docker_influxdb &
+                    docker build -t influxdb srcs/influxdb/. > ./logs/dockers_logs/logs_docker_influxdb &
                     wait 5
                     echo -e "$green Influxdb image ✔ $neutre"
                     ;;
@@ -179,7 +189,7 @@ delete()
                     delete mysql
                     delete php
                     delete grafana
-                    delete grafana
+                    delete influxdb
                     ;;
     esac
 }
