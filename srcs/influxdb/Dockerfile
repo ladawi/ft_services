@@ -4,6 +4,7 @@ RUN apk -f add wget
 RUN apk add influxdb --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/community
 
 COPY ./influx.sh .
+COPY ./database.influx .
 COPY influxdb.conf /etc/influxdb/.
 RUN mkdir -p app/influxdb
 

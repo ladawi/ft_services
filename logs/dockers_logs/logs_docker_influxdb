@@ -1,46 +1,35 @@
-Sending build context to Docker daemon  4.608kB
-Step 1/10 : FROM alpine:3.11.3
+Sending build context to Docker daemon  6.144kB
+Step 1/11 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
-Step 2/10 : RUN apk -f upgrade && apk -f update
+Step 2/11 : RUN apk -f upgrade && apk -f update
  ---> Using cache
  ---> caaa71527e5c
-Step 3/10 : RUN apk -f add wget
+Step 3/11 : RUN apk -f add wget
  ---> Using cache
  ---> b3a688e813db
-Step 4/10 : RUN apk add influxdb --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/community
+Step 4/11 : RUN apk add influxdb --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/community
  ---> Using cache
  ---> 2771e3ecfa6b
-Step 5/10 : COPY ./influx.sh .
- ---> 965e7cbce8cc
-Step 6/10 : COPY influxdb.conf /etc/influxdb/.
- ---> b3090f4adf5a
-Step 7/10 : RUN mkdir -p app/influxdb
- ---> Running in ff843ba6e83b
-Removing intermediate container ff843ba6e83b
- ---> 1bb056b2df60
-Step 8/10 : RUN mkdir /opt/collectd && mkdir /opt/collectd/share && mkdir /opt/collectd/share/collectd && cd /opt/collectd/share/collectd && wget https://raw.githubusercontent.com/collectd/collectd/master/src/types.db && cd -
- ---> Running in 6eae3d292962
-[91m--2020-10-21 12:50:14--  https://raw.githubusercontent.com/collectd/collectd/master/src/types.db
-[0m[91mResolving raw.githubusercontent.com... [0m[91m151.101.120.133[0m[91m
-Connecting to raw.githubusercontent.com|151.101.120.133|:443... [0m[91mconnected.
-[0m[91mHTTP request sent, awaiting response... [0m[91m200 OK
-Length: 14132[0m[91m (14K) [text/plain]
-[0m[91mSaving to: 'types.db'
-[0m[91m
-     0K[0m[91m [0m[91m....[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m [0m[91m.[0m[91m..                                        100% 1.14M=0.01s
-
-2020-10-21 12:50:16 (1.14 MB/s) - 'types.db' saved [14132/14132]
-
-[0m/
-Removing intermediate container 6eae3d292962
- ---> 7dd1a17eb4f9
-Step 9/10 : EXPOSE 8086
- ---> Running in cb80bc8c221d
-Removing intermediate container cb80bc8c221d
- ---> 0a493b067173
-Step 10/10 : ENTRYPOINT ["sh", "influx.sh"]
- ---> Running in fa8e3889cbb7
-Removing intermediate container fa8e3889cbb7
- ---> 08224a1c78f8
-Successfully built 08224a1c78f8
+Step 5/11 : COPY ./influx.sh .
+ ---> Using cache
+ ---> da84d996fa09
+Step 6/11 : COPY ./database.influx .
+ ---> Using cache
+ ---> ab170016ab67
+Step 7/11 : COPY influxdb.conf /etc/influxdb/.
+ ---> Using cache
+ ---> 02da67664dd0
+Step 8/11 : RUN mkdir -p app/influxdb
+ ---> Using cache
+ ---> b43301979f27
+Step 9/11 : RUN mkdir /opt/collectd && mkdir /opt/collectd/share && mkdir /opt/collectd/share/collectd && cd /opt/collectd/share/collectd && wget https://raw.githubusercontent.com/collectd/collectd/master/src/types.db && cd -
+ ---> Using cache
+ ---> ea3a424ff120
+Step 10/11 : EXPOSE 8086
+ ---> Using cache
+ ---> 6c4666882497
+Step 11/11 : ENTRYPOINT ["sh", "influx.sh"]
+ ---> Using cache
+ ---> 2f68f4890aa6
+Successfully built 2f68f4890aa6
 Successfully tagged influxdb:latest

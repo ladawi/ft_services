@@ -209,7 +209,7 @@ delete()
 minikubeip()
 {
     MINIKUBEIP=$(minikube ip)
-    sed -i -e "s/172.*:10250/${MINIKUBEIP}:10250/g" ./srcs/telegraf/telegraf.conf
+    sed -i -e "s/https://172.*:10250/https://${MINIKUBEIP}:10250/g" ./srcs/telegraf/telegraf.conf
 }
 
 
