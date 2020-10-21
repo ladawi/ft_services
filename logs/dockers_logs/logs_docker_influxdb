@@ -11,36 +11,36 @@ Step 4/10 : RUN apk add influxdb --no-cache -X http://dl-cdn.alpinelinux.org/alp
  ---> Using cache
  ---> 2771e3ecfa6b
 Step 5/10 : COPY ./influx.sh .
- ---> 0733e2b76c03
+ ---> 965e7cbce8cc
 Step 6/10 : COPY influxdb.conf /etc/influxdb/.
- ---> c3291a270465
+ ---> b3090f4adf5a
 Step 7/10 : RUN mkdir -p app/influxdb
- ---> Running in 5611edef550e
-Removing intermediate container 5611edef550e
- ---> 797d0b66f597
+ ---> Running in ff843ba6e83b
+Removing intermediate container ff843ba6e83b
+ ---> 1bb056b2df60
 Step 8/10 : RUN mkdir /opt/collectd && mkdir /opt/collectd/share && mkdir /opt/collectd/share/collectd && cd /opt/collectd/share/collectd && wget https://raw.githubusercontent.com/collectd/collectd/master/src/types.db && cd -
- ---> Running in f728ddb04573
-[91m--2020-10-16 13:36:45--  https://raw.githubusercontent.com/collectd/collectd/master/src/types.db
-[0m[91mResolving raw.githubusercontent.com... [0m[91m151.101.120.133
+ ---> Running in 6eae3d292962
+[91m--2020-10-21 12:50:14--  https://raw.githubusercontent.com/collectd/collectd/master/src/types.db
+[0m[91mResolving raw.githubusercontent.com... [0m[91m151.101.120.133[0m[91m
 Connecting to raw.githubusercontent.com|151.101.120.133|:443... [0m[91mconnected.
 [0m[91mHTTP request sent, awaiting response... [0m[91m200 OK
-[0m[91mLength: 14132 (14K) [text/plain]
-Saving to: 'types.db'
+Length: 14132[0m[91m (14K) [text/plain]
+[0m[91mSaving to: 'types.db'
 [0m[91m
-     0K .[0m[91m.[0m[91m......[0m[91m..[0m[91m ...           [0m[91m                             100%[0m[91m 1.74M=0.008s
+     0K[0m[91m [0m[91m....[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m [0m[91m.[0m[91m..                                        100% 1.14M=0.01s
 
-2020-10-16 13:36:45 (1.74 MB/s) - 'types.db' saved [14132/14132]
+2020-10-21 12:50:16 (1.14 MB/s) - 'types.db' saved [14132/14132]
 
 [0m/
-Removing intermediate container f728ddb04573
- ---> c4461cb8725c
-Step 9/10 : EXPOSE 8806
- ---> Running in 3681bdad32d8
-Removing intermediate container 3681bdad32d8
- ---> d91d947457e0
+Removing intermediate container 6eae3d292962
+ ---> 7dd1a17eb4f9
+Step 9/10 : EXPOSE 8086
+ ---> Running in cb80bc8c221d
+Removing intermediate container cb80bc8c221d
+ ---> 0a493b067173
 Step 10/10 : ENTRYPOINT ["sh", "influx.sh"]
- ---> Running in 058464884d5a
-Removing intermediate container 058464884d5a
- ---> 6af96b407a98
-Successfully built 6af96b407a98
+ ---> Running in fa8e3889cbb7
+Removing intermediate container fa8e3889cbb7
+ ---> 08224a1c78f8
+Successfully built 08224a1c78f8
 Successfully tagged influxdb:latest

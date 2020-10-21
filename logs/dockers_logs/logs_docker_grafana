@@ -1,26 +1,33 @@
-Sending build context to Docker daemon  32.77kB
-Step 1/8 : FROM alpine:3.11.3
+Sending build context to Docker daemon  553.5kB
+Step 1/10 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
-Step 2/8 : RUN apk -f upgrade && apk -f update
+Step 2/10 : RUN apk -f upgrade && apk -f update
  ---> Using cache
- ---> caaa71527e5c
-Step 3/8 : RUN apk add openrc musl busybox
+ ---> 413475cec4a8
+Step 3/10 : RUN apk add openrc musl busybox
  ---> Using cache
- ---> 804da0960fc2
-Step 4/8 : RUN apk add grafana --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing
+ ---> 878904c4c00a
+Step 4/10 : RUN apk add grafana --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing
  ---> Using cache
- ---> 97925f126e02
-Step 5/8 : COPY ./grafana.sh .
+ ---> 9105eabf9bb7
+Step 5/10 : COPY ./grafana.sh .
  ---> Using cache
- ---> 12fc03a00147
-Step 6/8 : COPY default.ini /etc/default.ini
- ---> Using cache
- ---> d62aa8668c78
-Step 7/8 : EXPOSE 3000
- ---> Using cache
- ---> 20de4b78bb3d
-Step 8/8 : ENTRYPOINT ["sh", "grafana.sh"]
- ---> Using cache
- ---> bf9928a051b3
-Successfully built bf9928a051b3
+ ---> a69961ad3bac
+Step 6/10 : COPY default.ini /etc/default.ini
+ ---> a4bd2555ff35
+Step 7/10 : RUN mkdir -p /usr/share/grafana/data
+ ---> Running in bf3a8549b92c
+Removing intermediate container bf3a8549b92c
+ ---> 945880b90585
+Step 8/10 : COPY ./grafana.db /usr/share/grafana/data/.
+ ---> 443722730849
+Step 9/10 : EXPOSE 3000
+ ---> Running in 7ba2608ed93a
+Removing intermediate container 7ba2608ed93a
+ ---> b7922f572e00
+Step 10/10 : ENTRYPOINT ["sh", "grafana.sh"]
+ ---> Running in 6d3417ecf764
+Removing intermediate container 6d3417ecf764
+ ---> f11daecc32af
+Successfully built f11daecc32af
 Successfully tagged grafana:latest

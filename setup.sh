@@ -145,13 +145,20 @@ build()
                     wait 5
                     echo -e "$green Influxdb image ✔ $neutre"
                     ;;
+            "telegraf")
+                    echo -e "$yellow Building Telegraf image ... $neutre"
+                    docker build -t telegraf srcs/telegraf/. > ./logs/dockers_logs/logs_docker_telegraf &
+                    wait 5
+                    echo -e "$green Telegraf image ✔ $neutre"
+                    ;;
             *)
                     build nginx 
                     build wordpress 
                     build mysql 
                     build php 
                     build grafana 
-                    build influxdb 
+                    build influxdb
+                    build telegraf
                     ;;
     esac
 }
@@ -183,6 +190,10 @@ delete()
                     kubectl delete -f srcs/kustomization/influxdb.yaml &> /dev/null
                     echo -e "$red ${bold}Influxdb.yaml deleted in Minikube ✗$neutre"
                     ;;
+            "telegraf")
+                    kubectl delete -f srcs/kustomization/telegraf.yaml &> /dev/null
+                    echo -e "$red ${bold}Telegraf.yaml deleted in Minikube ✗$neutre"
+                    ;;
             *)
                     delete nginx
                     delete wordpress
@@ -190,9 +201,17 @@ delete()
                     delete php
                     delete grafana
                     delete influxdb
+                    delete telegraf
                     ;;
     esac
 }
+
+minikubeip()
+{
+    MINIKUBEIP=$(minikube ip)
+    sed -i -e "s/172.*:10250/${MINIKUBEIP}:10250/g" ./srcs/telegraf/telegraf.conf
+}
+
 
 set +e
 
@@ -201,6 +220,7 @@ main ()
     case $1 in 
             "start")
                     start
+                    minikubeip
                     ;;
             "stop")
                     stop
@@ -227,6 +247,9 @@ main ()
                     build $2
                     apply
                     ;;
+            "minikubeip")
+                    minikubeip
+                    ;;
             *)
                 echo -e "List of commands :"
                 echo -e "-- start"
@@ -237,6 +260,7 @@ main ()
                 echo -e '-- del $2'
                 echo -e "-- apply"
                 echo -e '-- update $2'
+                echo -e '-- minikubeip'
     esac
 }
 

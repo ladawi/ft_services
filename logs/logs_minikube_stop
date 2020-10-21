@@ -1,4 +1,2 @@
 * Stopping node "minikube"  ...
-! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 5.975004892s
-* Restarting the docker service may improve performance.
 ! La machine "minikube n'existe pas, rien a arrêter

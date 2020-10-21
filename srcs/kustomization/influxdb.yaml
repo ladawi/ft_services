@@ -5,10 +5,10 @@ metadata:
   labels:
     app: ft_services
 spec:
-  clusterIP: None
+  type: ClusterIP
   ports:
-  - port: 8806
-    targetPort: 8806
+  - port: 8086
+    targetPort: 8086
   selector:
     app: ft_services
     tier: influxdb
@@ -67,7 +67,7 @@ spec:
         - name: INFLUXDB_DATABASE
           value: influxdb
         ports:
-        - containerPort: 8806
+        - containerPort: 8086
           name: influxdb
         volumeMounts:
           - name: influxdb-persistent-storage

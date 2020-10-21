@@ -9,6 +9,6 @@ RUN mkdir -p app/influxdb
 
 RUN mkdir /opt/collectd && mkdir /opt/collectd/share && mkdir /opt/collectd/share/collectd && cd /opt/collectd/share/collectd && wget https://raw.githubusercontent.com/collectd/collectd/master/src/types.db && cd -
 
-EXPOSE 8806
+EXPOSE 8086
 
 ENTRYPOINT ["sh", "influx.sh"]
