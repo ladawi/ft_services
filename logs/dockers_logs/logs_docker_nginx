@@ -17,20 +17,22 @@ Step 6/12 : RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/
  ---> Using cache
  ---> f870b2e2ffab
 Step 7/12 : COPY ./default.conf /etc/nginx/conf.d/.
- ---> e98f1b81697d
+ ---> Using cache
+ ---> 3a8b366633e2
 Step 8/12 : COPY index.html /usr/share/nginx/html/.
- ---> dabee58f1aee
+ ---> Using cache
+ ---> ad6ed49adce5
 Step 9/12 : COPY ssl_keys/ca.crt /etc/ssl/certs/ca.crt
- ---> 7260c46cfe60
+ ---> Using cache
+ ---> 8c172f80dab8
 Step 10/12 : COPY ssl_keys/ca.key /etc/ssl/private/ca.key
- ---> d992915e131a
+ ---> Using cache
+ ---> 2e4a0c3a8082
 Step 11/12 : EXPOSE 80 443
- ---> Running in 4600c18adb6d
-Removing intermediate container 4600c18adb6d
- ---> 9cb8336a1353
+ ---> Using cache
+ ---> 527ef49224c0
 Step 12/12 : ENTRYPOINT ["sh", "init.sh"]
- ---> Running in d6ce02fbeae4
-Removing intermediate container d6ce02fbeae4
- ---> 815cf4f3524b
-Successfully built 815cf4f3524b
+ ---> Using cache
+ ---> fa5ff4d6764f
+Successfully built fa5ff4d6764f
 Successfully tagged nginx:latest

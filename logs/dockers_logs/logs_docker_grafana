@@ -14,20 +14,19 @@ Step 5/10 : COPY ./grafana.sh .
  ---> Using cache
  ---> a69961ad3bac
 Step 6/10 : COPY default.ini /etc/default.ini
+ ---> Using cache
  ---> a4bd2555ff35
 Step 7/10 : RUN mkdir -p /usr/share/grafana/data
- ---> Running in bf3a8549b92c
-Removing intermediate container bf3a8549b92c
+ ---> Using cache
  ---> 945880b90585
 Step 8/10 : COPY ./grafana.db /usr/share/grafana/data/.
+ ---> Using cache
  ---> 443722730849
 Step 9/10 : EXPOSE 3000
- ---> Running in 7ba2608ed93a
-Removing intermediate container 7ba2608ed93a
+ ---> Using cache
  ---> b7922f572e00
 Step 10/10 : ENTRYPOINT ["sh", "grafana.sh"]
- ---> Running in 6d3417ecf764
-Removing intermediate container 6d3417ecf764
+ ---> Using cache
  ---> f11daecc32af
 Successfully built f11daecc32af
 Successfully tagged grafana:latest

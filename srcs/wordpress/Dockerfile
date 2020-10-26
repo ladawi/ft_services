@@ -19,6 +19,9 @@ RUN mv wordpress /var/www/html/localhost
 RUN chown -R 777 /var/www/html/localhost
 COPY wp-config.php /var/www/html/localhost/wp-config.php
 
+COPY wordpress.sql ./
+RUN chmod -R 777 wordpress.sql
+
 RUN mkdir /root/mkcert
 COPY ssl_keys/ca.crt /root/mkcert/ca.crt
 COPY ssl_keys/ca.key /root/mkcert/ca.key

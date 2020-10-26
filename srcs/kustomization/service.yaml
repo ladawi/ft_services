@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: all
+  labels:
+    app: all
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: all
+  template:
+    metadata:
+      labels:
+        app: all
+    spec:
+      containers:
+      - image: grafana
+        imagePullPolicy: Never
+        name: grafana
+        env:
+        - name: GRAFANA_DB_HOST
+          value: mysql
+        - name: GRAFANA_DB_USER
+          value: root
+        - name: GRAFANA_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+        ports:
+          - containerPort: 3000
+            name: grafana
+      - image: nginx
+        name: nginx-server
+        imagePullPolicy: Never
+        ports:
+          - containerPort: 80
+          - containerPort: 443
+      - image: php
+        imagePullPolicy: Never
+        name: phpmyadmin
+        env:
+        - name: PHPMYADMIN_DB_HOST
+          value: phpmyadmin
+        - name: PHPMYADMIN_DB_USER
+          value: admin
+        - name: PHPMYADMIN_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+        ports:
+          - containerPort: 5000
+            name: phpmyadmin
+      - image: wordpress
+        imagePullPolicy: Never
+        name: wordpress
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: mysql
+        - name: WORDPRESS_DB_USER
+          value: root
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+        ports:
+          - containerPort: 5050
+            name: wordpress
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: all
+  labels:
+    run: all
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 3000
+    targetPort: 3000
+    protocol: TCP
+    name: http-grafana
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http-nginx
+  - port: 443
+    targetPort: 443
+    protocol: TCP
+    name: https-nginx
+  - port: 5050
+    targetPort: 5050
+    protocol: TCP
+    name: http-wordpress
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
+    name: http-phpmyadmin
+  selector:
+    app: all

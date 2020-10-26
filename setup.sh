@@ -74,9 +74,12 @@ start()
     echo -e "$yellow Metrics-server ... $neutre"
     wait 5
     echo -e "$green Metrics-server ✔ $neutre"
-    minikube dashboard &> logs/logs_dashboard &
     echo -e "$yellow Dashboard ... $neutre"
+    minikube dashboard &> logs/logs_dashboard &
     echo -e "$green Dashboard Running ... $neutre"
+    build all
+    apply
+    minikubeip
 }
 
 stop()
@@ -209,7 +212,7 @@ delete()
 minikubeip()
 {
     MINIKUBEIP=$(minikube ip)
-    sed -i -e "s/https://172.*:10250/https://${MINIKUBEIP}:10250/g" ./srcs/telegraf/telegraf.conf
+    sed -i "s/https://172.*:10250/https://${MINIKUBEIP}:10250/g" ./srcs/telegraf/telegraf.conf
 }
 
 
@@ -220,7 +223,6 @@ main ()
     case $1 in 
             "start")
                     start
-                    minikubeip
                     ;;
             "stop")
                     stop
@@ -228,7 +230,6 @@ main ()
             "restart")
                     stop
                     start
-                    main update all
                     ;;
             "prune")
                     prune
