@@ -1,0 +1,14 @@
+serviceaccount/telegraf-account unchanged
+clusterrolebinding.rbac.authorization.k8s.io/telegraf-account unchanged
+configmap/config configured
+secret/mysql-pass-d2gtcm2t2k unchanged
+service/all unchanged
+service/influxdb unchanged
+service/mysql unchanged
+service/telegraf unchanged
+deployment.apps/all unchanged
+deployment.apps/influxdb unchanged
+deployment.apps/mysql unchanged
+deployment.apps/telegraf unchanged
+persistentvolumeclaim/influxdb-pv-claim unchanged
+persistentvolumeclaim/mysql-pv-claim unchanged

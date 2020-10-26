@@ -3,30 +3,30 @@ Step 1/10 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
 Step 2/10 : RUN apk -f upgrade && apk -f update
  ---> Using cache
- ---> 413475cec4a8
+ ---> caaa71527e5c
 Step 3/10 : RUN apk add openrc musl busybox
  ---> Using cache
- ---> 878904c4c00a
+ ---> 804da0960fc2
 Step 4/10 : RUN apk add grafana --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing
  ---> Using cache
- ---> 9105eabf9bb7
+ ---> 97925f126e02
 Step 5/10 : COPY ./grafana.sh .
  ---> Using cache
- ---> a69961ad3bac
+ ---> 12fc03a00147
 Step 6/10 : COPY default.ini /etc/default.ini
  ---> Using cache
- ---> a4bd2555ff35
+ ---> 7636a4e3ea33
 Step 7/10 : RUN mkdir -p /usr/share/grafana/data
  ---> Using cache
- ---> 945880b90585
+ ---> 2a1207e6638b
 Step 8/10 : COPY ./grafana.db /usr/share/grafana/data/.
  ---> Using cache
- ---> 443722730849
+ ---> 7c8039b9945f
 Step 9/10 : EXPOSE 3000
  ---> Using cache
- ---> b7922f572e00
+ ---> b9da24e08969
 Step 10/10 : ENTRYPOINT ["sh", "grafana.sh"]
  ---> Using cache
- ---> f11daecc32af
-Successfully built f11daecc32af
+ ---> 3bdd97f7f833
+Successfully built 3bdd97f7f833
 Successfully tagged grafana:latest

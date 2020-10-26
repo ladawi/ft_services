@@ -32,8 +32,8 @@ spec:
           - containerPort: 3000
             name: grafana
       - image: nginx
-        name: nginx-server
         imagePullPolicy: Never
+        name: nginx-server
         ports:
           - containerPort: 80
           - containerPort: 443

@@ -3,30 +3,30 @@ Step 1/10 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
 Step 2/10 : RUN apk -f upgrade && apk -f update
  ---> Using cache
- ---> 413475cec4a8
+ ---> caaa71527e5c
 Step 3/10 : RUN apk -f add wget tar
  ---> Using cache
- ---> e6858b7800b5
+ ---> d038a6395ca1
 Step 4/10 : RUN mkdir -p /etc/telegraf
  ---> Using cache
- ---> d791c59b4ce2
+ ---> 4db159b4cf11
 Step 5/10 : RUN apk add telegraf --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing
  ---> Using cache
- ---> 6502724a4650
+ ---> e55b9a4e07a3
 Step 6/10 : RUN touch /var/run/utmp
  ---> Using cache
- ---> b307b6bf97d7
+ ---> 1bc7639317a3
 Step 7/10 : COPY telegraf.conf /etc/telegraf/.
  ---> Using cache
- ---> cbd060adac5f
+ ---> 45b6027fc637
 Step 8/10 : EXPOSE 35000
  ---> Using cache
- ---> 4c51740a26c9
+ ---> 242e00259762
 Step 9/10 : COPY telegraph.sh .
  ---> Using cache
- ---> c427d2d87a11
+ ---> 952d2ad4d2cc
 Step 10/10 : ENTRYPOINT ["sh", "telegraph.sh"]
  ---> Using cache
- ---> 67870e7e23b7
-Successfully built 67870e7e23b7
+ ---> f2201acd4bf8
+Successfully built f2201acd4bf8
 Successfully tagged telegraf:latest

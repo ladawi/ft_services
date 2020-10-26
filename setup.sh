@@ -48,21 +48,18 @@ progress_bar() {
 apply()
 {
     echo -e "$yellow Kustomization file ... $neutre"
-    kubectl apply -k srcs/kustomization &> ./logs/kubectl_apply &
+    kubectl apply -k srcs/kustomization &> ./logs/logs_kubectl_apply &
     wait 5
     echo -e "$green Kustomization file ✔ $neutre"
-#     echo -e "$yellow Apply metrics-server ... $neutre"
-#     kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.7/components.yaml &>> ./logs/kubectl_apply &
-#     wait 5
-#     echo -e "$green Apply metrics-server ✔ $neutre"
 }
 
 start()
 {
+	cleanlogs
     echo -e "$yellow Docker ... $neutre"
     sudo service docker start
     echo -e "$green Docker ✔ $neutre"
-    minikube start --driver=$DRIVER &> logs/lauching_logs &
+    minikube start --driver=$DRIVER &> logs/logs_launch &
     echo -e "$yellow Minikube ... $neutre"
     wait 5
     echo -e "$green Minikube ✔ $neutre"
@@ -86,14 +83,14 @@ stop()
 {
     sudo service docker stop
     wait 5
-    echo -e "$redbckgrnd ${bold}Docker stopped 💀$neutre"
+    echo -e "$red${bold}Docker stopped 💀$neutre"
     sudo service nginx stop
     wait 5
-    echo -e "$redbckgrnd ${bold}nginx stopped 💀$neutre"
+    echo -e "$red ${bold}nginx stopped 💀$neutre"
     minikube stop &> logs/logs_minikube_stop &
     minikube delete &> logs/logs_minikube_del &
     wait 15
-    echo -e "$redbckgrnd ${bold}Minikube stopped 💀$neutre"
+    echo -e "$red ${bold}Minikube stopped 💀$neutre"
 }
 
 prune()
@@ -197,12 +194,13 @@ delete()
                     kubectl delete -f srcs/kustomization/telegraf.yaml &> /dev/null
                     echo -e "$red ${bold}Telegraf.yaml deleted in Minikube ✗$neutre"
                     ;;
+        	"service")
+                    kubectl delete -f srcs/kustomization/service.yaml &> /dev/null
+                    echo -e "$red ${bold}Service.yaml deleted in Minikube ✗$neutre"
+                    ;;
             *)
-                    delete nginx
-                    delete wordpress
+                    delete service
                     delete mysql
-                    delete php
-                    delete grafana
                     delete influxdb
                     delete telegraf
                     ;;
@@ -215,7 +213,12 @@ minikubeip()
     sed -i "s/https://172.*:10250/https://${MINIKUBEIP}:10250/g" ./srcs/telegraf/telegraf.conf
 }
 
-
+cleanlogs()
+{
+	rm ./logs/logs_*
+	rm ./logs/dockers_logs/logs*
+	echo -e "${red} ${bold}💀 Removed logs 💀${neutre}"
+}
 set +e
 
 main ()
@@ -251,6 +254,9 @@ main ()
             "minikubeip")
                     minikubeip
                     ;;
+            "cleanlogs")
+                    cleanlogs
+                    ;;
             *)
                 echo -e "List of commands :"
                 echo -e "-- start"
@@ -262,6 +268,7 @@ main ()
                 echo -e "-- apply"
                 echo -e '-- update $2'
                 echo -e '-- minikubeip'
+                echo -e '-- cleanlogs'
     esac
 }
 

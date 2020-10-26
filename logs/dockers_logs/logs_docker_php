@@ -3,39 +3,39 @@ Step 1/13 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
 Step 2/13 : COPY ./init.sh .
  ---> Using cache
- ---> 72f9e8fdb0ed
+ ---> 499076cabdeb
 Step 3/13 : RUN apk update && apk upgrade
  ---> Using cache
- ---> aacf1bccb004
+ ---> 7252d42027df
 Step 4/13 : RUN apk -f add nginx mariadb-server php7.3-fpm php-mysql wget
  ---> Using cache
- ---> 6cda92fef4ad
+ ---> a85859093dbc
 Step 5/13 : RUN apk -f add php7-fpm php7-mbstring php7-session php7-mysqli php7-gettext 	php7-pdo php7-zip php7-sqlite3 php7-apcu php7-pdo_pgsql php7-bcmath php7-gd php7-odbc 	php7-pdo_mysql php7-pdo_sqlite php7-xmlreader php7-xmlrpc php7-bz2 php7-iconv php7-pdo_dblib 	php7-curl php7-ctype php7-mcrypt php7-soap php7-openssl php7-gmp php7-pdo_odbc php7-json php7-dom
  ---> Using cache
- ---> 3a6ab3efbb4b
+ ---> fc37c40f8043
 Step 6/13 : RUN mkdir -p /var/www/html/localhost/phpmyadmin
  ---> Using cache
- ---> dc504c09b34c
+ ---> 7c152b07d602
 Step 7/13 : RUN mkdir -p /run/php
  ---> Using cache
- ---> 58a03a1205a4
+ ---> 4d8b0eb3de3b
 Step 8/13 : RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-english.tar.gz && tar -xvzf phpMyAdmin-4.9.0.1-english.tar.gz --strip-components=1 -C /var/www/html/localhost/phpmyadmin
  ---> Using cache
- ---> 7eef8575e352
+ ---> 075fd743623e
 Step 9/13 : COPY ./config.inc.php /var/www/html/localhost/phpmyadmin/
  ---> Using cache
- ---> d41bc3595c3d
+ ---> 7db504c4c536
 Step 10/13 : RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/share/nginx/html
  ---> Using cache
- ---> d0c7a97a107b
+ ---> 6f18a18e8be9
 Step 11/13 : COPY ./default.conf /etc/nginx/conf.d/.
  ---> Using cache
- ---> d72692f82dce
+ ---> ee6e230e84b8
 Step 12/13 : EXPOSE 5000
  ---> Using cache
- ---> cd77b706f296
+ ---> 1b45cff92d91
 Step 13/13 : ENTRYPOINT ["sh", "init.sh"]
  ---> Using cache
- ---> a3029722bb38
-Successfully built a3029722bb38
+ ---> 278d1e01f232
+Successfully built 278d1e01f232
 Successfully tagged php:latest
