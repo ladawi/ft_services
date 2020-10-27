@@ -1,1 +1,3 @@
+! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 12.910819092s
+* Restarting the docker service may improve performance.
 * The 'metallb' addon is enabled

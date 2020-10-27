@@ -1,41 +1,38 @@
 Sending build context to Docker daemon  10.24kB
 Step 1/12 : FROM alpine:3.11.3
-3.11.3: Pulling from library/alpine
-Digest: sha256:ab00606a42621fb68f2ed6ad3c88be54397f981a7b70a79db3d1172b11c4367d
-Status: Downloaded newer image for alpine:3.11.3
  ---> e7d92cdc71fe
 Step 2/12 : COPY ./init.sh .
  ---> Using cache
- ---> ca3a24fac4cb
+ ---> 306f41712be6
 Step 3/12 : RUN apk update && apk upgrade
  ---> Using cache
- ---> 61ce59e37e6a
+ ---> 7497dd385517
 Step 4/12 : RUN apk add nginx
  ---> Using cache
- ---> 5cb26a25eecd
+ ---> d909491a563b
 Step 5/12 : RUN apk add bash
  ---> Using cache
- ---> a3ef47982484
+ ---> 0ac5e7b58842
 Step 6/12 : RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/share/nginx/html
  ---> Using cache
- ---> f21cf0c0bf98
+ ---> 0d361436ed78
 Step 7/12 : COPY ./default.conf /etc/nginx/conf.d/.
  ---> Using cache
- ---> f41ff0b1b963
+ ---> a83482d163fd
 Step 8/12 : COPY index.html /usr/share/nginx/html/.
  ---> Using cache
- ---> 9576cc0c7f9a
+ ---> e938a03f307b
 Step 9/12 : COPY ssl_keys/ca.crt /etc/ssl/certs/ca.crt
  ---> Using cache
- ---> edba2b317751
+ ---> 1ecfed1345f0
 Step 10/12 : COPY ssl_keys/ca.key /etc/ssl/private/ca.key
  ---> Using cache
- ---> bfc3ff1e593b
+ ---> 05c5e795dc6c
 Step 11/12 : EXPOSE 80 443
  ---> Using cache
- ---> 33f6ec51d7f6
+ ---> 4be3274f436c
 Step 12/12 : ENTRYPOINT ["sh", "init.sh"]
  ---> Using cache
- ---> c35acebd36e6
-Successfully built c35acebd36e6
+ ---> 98d70a7fd2a6
+Successfully built 98d70a7fd2a6
 Successfully tagged nginx:latest

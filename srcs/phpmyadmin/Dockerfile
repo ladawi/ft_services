@@ -19,7 +19,8 @@ COPY ./config.inc.php /var/www/html/localhost/phpmyadmin/
 
 RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/share/nginx/html
 COPY ./default.conf /etc/nginx/conf.d/.
-
+RUN mkdir -p /var/www/html/localhost/phpmyadmin/tmp
+RUN chmod ugo+r /var/www/html/localhost/phpmyadmin/tmp
 EXPOSE 5000
 
 ENTRYPOINT ["sh", "init.sh"]

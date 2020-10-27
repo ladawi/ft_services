@@ -5,6 +5,9 @@ secretGenerator:
 resources:
 - mysql.yaml
 - influxdb.yaml
-- service.yaml
 - metallb-config.yaml
 - telegraf.yaml
+- nginx.yaml
+- grafana.yaml
+- phpmyadmin.yaml
+- wordpress.yaml

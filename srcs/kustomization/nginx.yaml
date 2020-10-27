@@ -25,6 +25,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    metallb.universe.tf/allow-shared-ip: sharing key
   name: nginx
   labels:
     run: nginx

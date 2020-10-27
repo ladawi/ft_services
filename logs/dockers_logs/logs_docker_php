@@ -1,41 +1,47 @@
-Sending build context to Docker daemon  9.728kB
-Step 1/13 : FROM alpine:3.11.3
+Sending build context to Docker daemon  10.24kB
+Step 1/15 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
-Step 2/13 : COPY ./init.sh .
+Step 2/15 : COPY ./init.sh .
  ---> Using cache
- ---> 499076cabdeb
-Step 3/13 : RUN apk update && apk upgrade
+ ---> 9c299ff1315c
+Step 3/15 : RUN apk update && apk upgrade
  ---> Using cache
- ---> 7252d42027df
-Step 4/13 : RUN apk -f add nginx mariadb-server php7.3-fpm php-mysql wget
+ ---> 48e6d87b318b
+Step 4/15 : RUN apk -f add nginx mariadb-server php7.3-fpm php-mysql wget
  ---> Using cache
- ---> a85859093dbc
-Step 5/13 : RUN apk -f add php7-fpm php7-mbstring php7-session php7-mysqli php7-gettext 	php7-pdo php7-zip php7-sqlite3 php7-apcu php7-pdo_pgsql php7-bcmath php7-gd php7-odbc 	php7-pdo_mysql php7-pdo_sqlite php7-xmlreader php7-xmlrpc php7-bz2 php7-iconv php7-pdo_dblib 	php7-curl php7-ctype php7-mcrypt php7-soap php7-openssl php7-gmp php7-pdo_odbc php7-json php7-dom
+ ---> 3c3db7491b88
+Step 5/15 : RUN apk -f add php7-fpm php7-mbstring php7-session php7-mysqli php7-gettext 	php7-pdo php7-zip php7-sqlite3 php7-apcu php7-pdo_pgsql php7-bcmath php7-gd php7-odbc 	php7-pdo_mysql php7-pdo_sqlite php7-xmlreader php7-xmlrpc php7-bz2 php7-iconv php7-pdo_dblib 	php7-curl php7-ctype php7-mcrypt php7-soap php7-openssl php7-gmp php7-pdo_odbc php7-json php7-dom
  ---> Using cache
- ---> fc37c40f8043
-Step 6/13 : RUN mkdir -p /var/www/html/localhost/phpmyadmin
+ ---> 0789a24fe5b8
+Step 6/15 : RUN mkdir -p /var/www/html/localhost/phpmyadmin
  ---> Using cache
- ---> 7c152b07d602
-Step 7/13 : RUN mkdir -p /run/php
+ ---> 779eb327e9ce
+Step 7/15 : RUN mkdir -p /run/php
  ---> Using cache
- ---> 4d8b0eb3de3b
-Step 8/13 : RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-english.tar.gz && tar -xvzf phpMyAdmin-4.9.0.1-english.tar.gz --strip-components=1 -C /var/www/html/localhost/phpmyadmin
+ ---> acacd3d7c3cf
+Step 8/15 : RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-english.tar.gz && tar -xvzf phpMyAdmin-4.9.0.1-english.tar.gz --strip-components=1 -C /var/www/html/localhost/phpmyadmin
  ---> Using cache
- ---> 075fd743623e
-Step 9/13 : COPY ./config.inc.php /var/www/html/localhost/phpmyadmin/
+ ---> e0f10d74edeb
+Step 9/15 : COPY ./config.inc.php /var/www/html/localhost/phpmyadmin/
  ---> Using cache
- ---> 7db504c4c536
-Step 10/13 : RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/share/nginx/html
+ ---> 82c106ccf1c0
+Step 10/15 : RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/share/nginx/html
  ---> Using cache
- ---> 6f18a18e8be9
-Step 11/13 : COPY ./default.conf /etc/nginx/conf.d/.
+ ---> 742ab6d8a660
+Step 11/15 : COPY ./default.conf /etc/nginx/conf.d/.
  ---> Using cache
- ---> ee6e230e84b8
-Step 12/13 : EXPOSE 5000
+ ---> 5c9ef1336af4
+Step 12/15 : RUN mkdir -p /var/www/html/localhost/phpmyadmin/tmp
  ---> Using cache
- ---> 1b45cff92d91
-Step 13/13 : ENTRYPOINT ["sh", "init.sh"]
+ ---> 621a6f826b3e
+Step 13/15 : RUN chmod ugo+r /var/www/html/localhost/phpmyadmin/tmp
  ---> Using cache
- ---> 278d1e01f232
-Successfully built 278d1e01f232
+ ---> ae9a9357f446
+Step 14/15 : EXPOSE 5000
+ ---> Using cache
+ ---> 66c4ec7fd15d
+Step 15/15 : ENTRYPOINT ["sh", "init.sh"]
+ ---> Using cache
+ ---> 6034bf2b97ce
+Successfully built 6034bf2b97ce
 Successfully tagged php:latest

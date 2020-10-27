@@ -1,9 +1,9 @@
 * minikube v1.13.1 sur Ubuntu 18.04
-* Utilisation du pilote docker basé sur la configuration de l'utilisateur
+* Utilisation du pilote docker basé sur le profil existant
 * Démarrage du noeud de plan de contrôle minikube dans le cluster minikube
-* Creating docker container (CPUs=2, Memory=2200MB) ...
+* Restarting existing docker container for "minikube" ...
 
-X Docker is nearly out of disk space, which may cause deployments to fail! (90% of capacity)
+X Docker is nearly out of disk space, which may cause deployments to fail! (89% of capacity)
 * Suggestion: 
 
     Try at least one of the following to free up space on the device:
@@ -15,7 +15,21 @@ X Docker is nearly out of disk space, which may cause deployments to fail! (90% 
 * Related issue: https://github.com/kubernetes/minikube/issues/9024
 
 * Préparation de Kubernetes v1.19.2 sur Docker 19.03.8...
+X Problems detected in kubelet:
+  - Oct 27 16:12:50 minikube kubelet[1056]: E1027 16:12:50.461914    1056 pod_workers.go:191] Error syncing pod dcc127c185c80a61d90d8e659e768641 ("kube-controller-manager-minikube_kube-system(dcc127c185c80a61d90d8e659e768641)"), skipping: failed to "StartContainer" for "kube-controller-manager" with CrashLoopBackOff: "back-off 10s restarting failed container=kube-controller-manager pod=kube-controller-manager-minikube_kube-system(dcc127c185c80a61d90d8e659e768641)"
 * Verifying Kubernetes components...
 X Unable to push cached images: images: read: decode /home/user42/.minikube/config/config.json: EOF
-* Enabled addons: default-storageclass, storage-provisioner
+! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 19.002186476s
+* Restarting the docker service may improve performance.
+! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 19.001770106s
+* Restarting the docker service may improve performance.
+! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 19.139546502s
+* Restarting the docker service may improve performance.
+! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 19.001408153s
+! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 19.412528953s
+* Restarting the docker service may improve performance.
+* Restarting the docker service may improve performance.
+! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 19.003211367s
+* Restarting the docker service may improve performance.
+* Enabled addons: dashboard, default-storageclass, metallb, metrics-server, storage-provisioner
 * Done! kubectl is now configured to use "minikube" by default
