@@ -202,9 +202,9 @@ delete()
                     delete influxdb
                     delete telegraf
                     delete wordpress
-                    delete phpsr        
+                    delete php    
                     delete grafana
-					delete nginx
+		delete nginx
                     ;;
     esac
 }

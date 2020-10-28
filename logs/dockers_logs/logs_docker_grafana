@@ -1,4 +1,4 @@
-Sending build context to Docker daemon  553.5kB
+Sending build context to Docker daemon  614.9kB
 Step 1/10 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
 Step 2/10 : RUN apk -f upgrade && apk -f update
@@ -20,13 +20,14 @@ Step 7/10 : RUN mkdir -p /usr/share/grafana/data
  ---> Using cache
  ---> ea31367c4978
 Step 8/10 : COPY ./grafana.db /usr/share/grafana/data/grafana.db
- ---> Using cache
- ---> b19869e4ad26
+ ---> ab84f0ede1a9
 Step 9/10 : EXPOSE 3000
- ---> Using cache
- ---> 44583e8d305c
+ ---> Running in c6a1dc9cb851
+Removing intermediate container c6a1dc9cb851
+ ---> 44b599aa2b15
 Step 10/10 : ENTRYPOINT ["sh", "grafana.sh"]
- ---> Using cache
- ---> 789a528bc689
-Successfully built 789a528bc689
+ ---> Running in 0ca44bcb92c1
+Removing intermediate container 0ca44bcb92c1
+ ---> 603b430a233b
+Successfully built 603b430a233b
 Successfully tagged grafana:latest
