@@ -1,9 +1,9 @@
-* minikube v1.13.1 sur Ubuntu 18.04
+* minikube v1.13.0 sur Ubuntu 18.04 (vbox/amd64)
 * Utilisation du pilote docker basé sur le profil existant
 * Démarrage du noeud de plan de contrôle minikube dans le cluster minikube
 * Mise à jour du container docker en marche "minikube" ...
 
-X Docker is nearly out of disk space, which may cause deployments to fail! (90% of capacity)
+X Docker is nearly out of disk space, which may cause deployments to fail! (89% of capacity)
 * Suggestion: 
 
     Try at least one of the following to free up space on the device:
@@ -14,14 +14,7 @@ X Docker is nearly out of disk space, which may cause deployments to fail! (90% 
     3. Run "minikube ssh -- docker system prune" if using the docker container runtime
 * Related issue: https://github.com/kubernetes/minikube/issues/9024
 
-* Préparation de Kubernetes v1.19.2 sur Docker 19.03.8...
-X Unable to push cached images: images: read: decode /home/user42/.minikube/config/config.json: EOF
+* Préparation de Kubernetes v1.19.0 sur Docker 19.03.8...
 * Verifying Kubernetes components...
-! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 3.705926523s
-* Restarting the docker service may improve performance.
-! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 3.103750658s
-* Restarting the docker service may improve performance.
-! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 5.609290236s
-* Restarting the docker service may improve performance.
 * Enabled addons: dashboard, default-storageclass, metallb, metrics-server, storage-provisioner
 * Done! kubectl is now configured to use "minikube" by default

@@ -102,7 +102,7 @@ prune()
 
 build()
 {
-    if [ "$EVAL" != "DONE" ]; then
+	if [ "$EVAL" != "DONE" ]; then
         echo -e "${purple}${bold} "'eval $(minikube -p minikube docker-env)'" -> done ✔$neutre"
         eval $(minikube -p minikube docker-env) &> /dev/null
         EVAL='DONE';

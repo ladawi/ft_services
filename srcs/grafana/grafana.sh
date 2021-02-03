@@ -1,2 +1,3 @@
 echo "grafana.sh ..."
-grafana-server -homepath /usr/share/grafana/ -config /etc/grafana.ini
+telegraf &
+cd ./grafana-6.7.2/bin/ && ./grafana-server

@@ -1,32 +1,41 @@
-Sending build context to Docker daemon  6.144kB
-Step 1/10 : FROM alpine:3.11.3
+Sending build context to Docker daemon  6.656kB
+Step 1/13 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
-Step 2/10 : RUN apk -f upgrade && apk -f update
+Step 2/13 : RUN apk -f upgrade && apk -f update
  ---> Using cache
- ---> 47e2dc54d4f3
-Step 3/10 : RUN apk -f add wget tar
+ ---> 3da26cd3ccea
+Step 3/13 : RUN apk -f add wget tar
  ---> Using cache
- ---> 35fac034d916
-Step 4/10 : RUN mkdir -p /etc/telegraf
+ ---> 3b675a671284
+Step 4/13 : RUN mkdir -p /etc/telegraf
  ---> Using cache
- ---> d25499857ff1
-Step 5/10 : RUN apk add telegraf --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing
+ ---> d78f0e167da3
+Step 5/13 : RUN wget https://dl.influxdata.com/telegraf/releases/telegraf-1.15.2_linux_amd64.tar.gz && tar -zxf telegraf-1.15.2_linux_amd64.tar.gz && mv telegraf-1.15.2 telegraf && rm telegraf-1.15.2_linux_amd64.tar.gz
  ---> Using cache
- ---> c67221e3fce3
-Step 6/10 : RUN touch /var/run/utmp
+ ---> a86974c0cfd6
+Step 6/13 : RUN cp -rf telegraf/etc/* /etc/
  ---> Using cache
- ---> 1276081f6a5a
-Step 7/10 : COPY telegraf.conf /etc/telegraf/.
+ ---> 34eb5190b793
+Step 7/13 : RUN cp -rf telegraf/usr/* /usr/
  ---> Using cache
- ---> 9e63076fbf60
-Step 8/10 : EXPOSE 35000
+ ---> ec932649c511
+Step 8/13 : RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
  ---> Using cache
- ---> 4d4ef098af82
-Step 9/10 : COPY telegraph.sh .
+ ---> 4c822bf60e9c
+Step 9/13 : RUN touch /var/run/utmp
  ---> Using cache
- ---> 406f1c32c89e
-Step 10/10 : ENTRYPOINT ["sh", "telegraph.sh"]
+ ---> 80e9a48c450a
+Step 10/13 : COPY telegraf.conf /etc/telegraf/.
  ---> Using cache
- ---> f6fd21dca4fd
-Successfully built f6fd21dca4fd
+ ---> 29b8dac35cd4
+Step 11/13 : EXPOSE 35000
+ ---> Using cache
+ ---> dbd11e880392
+Step 12/13 : COPY telegraf.sh .
+ ---> Using cache
+ ---> 3ee0bc9aaa7e
+Step 13/13 : ENTRYPOINT ["sh", "telegraf.sh"]
+ ---> Using cache
+ ---> df17558ed313
+Successfully built df17558ed313
 Successfully tagged telegraf:latest

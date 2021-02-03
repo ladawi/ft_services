@@ -3,57 +3,57 @@ Step 1/19 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
 Step 2/19 : COPY ./init.sh .
  ---> Using cache
- ---> e3c61d15ce20
+ ---> d85173adc7d2
 Step 3/19 : RUN apk update && apk upgrade
  ---> Using cache
- ---> 5fe37ffb8073
+ ---> 3491188f3a62
 Step 4/19 : RUN apk -f add nginx wget mariadb-server mysql-client mysql-server wget busybox busybox-extras
  ---> Using cache
- ---> fc29641bfc50
+ ---> c2eace62c29a
 Step 5/19 : RUN apk -f add php7-fpm php7-mbstring php7-session php7-mysqli php7-gettext 	php7-pdo php7-zip php7-sqlite3 php7-apcu php7-pdo_pgsql php7-bcmath php7-gd php7-odbc 	php7-pdo_mysql php7-pdo_sqlite php7-xmlreader php7-xmlrpc php7-bz2 php7-iconv php7-pdo_dblib 	php7-curl php7-ctype php7-mcrypt php7-soap php7-openssl php7-gmp php7-pdo_odbc php7-json php7-dom php-mysql
  ---> Using cache
- ---> 1150c2cc3a58
+ ---> f8467bdf7e34
 Step 6/19 : COPY ./nginx.conf /etc/nginx/conf.d/.
  ---> Using cache
- ---> ef76b30ed435
+ ---> 58e6d3b56146
 Step 7/19 : RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/share/nginx/html
  ---> Using cache
- ---> 6c22eda32eef
+ ---> 06f0285e1b82
 Step 8/19 : RUN wget -c http://wordpress.org/latest.tar.gz && tar -xzvf latest.tar.gz
  ---> Using cache
- ---> 9f5361888af8
+ ---> 10fdfd26f85c
 Step 9/19 : RUN mkdir -p /var/www/html/localhost
  ---> Using cache
- ---> aaca14fda8de
+ ---> bb263579f606
 Step 10/19 : RUN mv wordpress /var/www/html/localhost
  ---> Using cache
- ---> 5f211ece0a79
+ ---> 998605ae3fea
 Step 11/19 : RUN chown -R 777 /var/www/html/localhost
  ---> Using cache
- ---> 1855cbe6433b
+ ---> a415d80ee952
 Step 12/19 : COPY wp-config.php /var/www/html/localhost/wp-config.php
  ---> Using cache
- ---> 6dffcf795e26
+ ---> 27840372c558
 Step 13/19 : COPY wordpress.sql ./
  ---> Using cache
- ---> fc8f9e79ce47
+ ---> 493780b9161b
 Step 14/19 : RUN chmod -R 777 wordpress.sql
  ---> Using cache
- ---> 3dbccea2c2a6
+ ---> ba778d7c10cb
 Step 15/19 : RUN mkdir /root/mkcert
  ---> Using cache
- ---> 2a6d601c7490
+ ---> e7fbd934dc80
 Step 16/19 : COPY ssl_keys/ca.crt /root/mkcert/ca.crt
  ---> Using cache
- ---> cc564117fdfb
+ ---> 136e6200b1af
 Step 17/19 : COPY ssl_keys/ca.key /root/mkcert/ca.key
  ---> Using cache
- ---> 02b78c12d8cd
+ ---> de874ee5bf95
 Step 18/19 : EXPOSE 5050
  ---> Using cache
- ---> ae4c233bcf3c
+ ---> 514bd3eb54cf
 Step 19/19 : ENTRYPOINT ["sh", "init.sh"]
  ---> Using cache
- ---> 2a0425da437e
-Successfully built 2a0425da437e
+ ---> 53f8878585e0
+Successfully built 53f8878585e0
 Successfully tagged wordpress:latest
