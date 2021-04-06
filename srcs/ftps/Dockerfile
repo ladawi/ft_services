@@ -3,9 +3,15 @@ FROM alpine:3.11.3
 RUN apk update
 RUN apk -f add openrc
 RUN apk -f add vsftpd
+RUN apk add bash
 
-RUN echo "root:1234" | chpasswd
+COPY ftps.sh .
+COPY vsftpd.conf /etc/vsftpd/.
 
-EXPOSE 21 42000 43000
+RUN adduser --disabled-password --home etc/vsftpd/home ladawi && \
+    echo "ladawi:ladawi" | chpasswd
 
-ENTRYPOINT ["vsftpd", "/etc/vsftpd/vsftpd.conf"]
+RUN chown ladawi /
+EXPOSE 21 40000
+
+ENTRYPOINT ["sh", "ftps.sh"]

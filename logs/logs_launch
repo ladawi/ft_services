@@ -1,20 +1,17 @@
-* minikube v1.13.0 sur Ubuntu 18.04 (vbox/amd64)
+* minikube v1.18.1 sur Ubuntu 18.04
 * Utilisation du pilote docker basé sur le profil existant
 * Démarrage du noeud de plan de contrôle minikube dans le cluster minikube
-* Mise à jour du container docker en marche "minikube" ...
-
-X Docker is nearly out of disk space, which may cause deployments to fail! (89% of capacity)
-* Suggestion: 
-
-    Try at least one of the following to free up space on the device:
-    
-    1. Run "docker system prune" to remove unused docker data
-    2. Increase the amount of memory allocated to Docker for Desktop via
-    Docker icon > Preferences > Resources > Disk Image Size
-    3. Run "minikube ssh -- docker system prune" if using the docker container runtime
-* Related issue: https://github.com/kubernetes/minikube/issues/9024
-
-* Préparation de Kubernetes v1.19.0 sur Docker 19.03.8...
+* Restarting existing docker container for "minikube" ...
+* Préparation de Kubernetes v1.20.2 sur Docker 20.10.3...
 * Verifying Kubernetes components...
-* Enabled addons: dashboard, default-storageclass, metallb, metrics-server, storage-provisioner
-* Done! kubectl is now configured to use "minikube" by default
+  - Using image kubernetesui/dashboard:v2.1.0
+  - Using image gcr.io/k8s-minikube/storage-provisioner:v4
+  - Using image kubernetesui/metrics-scraper:v1.0.4
+  - Using image metallb/speaker:v0.8.2
+  - Using image k8s.gcr.io/metrics-server-amd64:v0.2.1
+  - Using image metallb/controller:v0.8.2
+* Enabled addons: storage-provisioner, metallb, metrics-server, default-storageclass, dashboard
+
+! /usr/local/bin/kubectl est la version 1.18.0, qui peut comporter des incompatibilités avec Kubernetes 1.20.2.
+  - Want kubectl v1.20.2? Try 'minikube kubectl -- get pods -A'
+* Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default

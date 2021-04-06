@@ -108,57 +108,64 @@ build()
         EVAL='DONE';
     fi
     case $1 in
-            "nginx")
-                    echo -e "$yellow Building Nginx image ... $neutre"
-                    docker build -t nginx srcs/nginx/. > ./logs/dockers_logs/logs_docker_nginx &
-                    wait 5
-                    echo -e "$green Nginx image ✔ $neutre"
-                    ;;
-            "wordpress")
-                    echo -e "$yellow Building Wordpress image ... $neutre"
-                    docker build -t wordpress srcs/wordpress/. > ./logs/dockers_logs/logs_docker_wordpress &
-                    wait 5
-                    echo -e "$green Wordpress image ✔ $neutre"
-                    ;;
-            "mysql")
-                    echo -e "$yellow Building Mysql image ... $neutre"
-                    docker build -t mysql srcs/mysql/. > ./logs/dockers_logs/logs_docker_mysql &
-                    wait 5
-                    echo -e "$green Mysql image ✔ $neutre"
-                    ;;
-            "php")
-                    echo -e "$yellow Building Phpmyadmin image ... $neutre"
-                    docker build -t php srcs/phpmyadmin/. > ./logs/dockers_logs/logs_docker_php &
-                    wait 5
-                    echo -e "$green Phpmyadmin image ✔ $neutre"
-                    ;;
-            "grafana")
-                    echo -e "$yellow Building Grafana image ... $neutre"
-                    docker build -t grafana srcs/grafana/. > ./logs/dockers_logs/logs_docker_grafana &
-                    wait 5
-                    echo -e "$green Grafana image ✔ $neutre"
-                    ;;
-            "influxdb")
-                    echo -e "$yellow Building Influxdb image ... $neutre"
-                    docker build -t influxdb srcs/influxdb/. > ./logs/dockers_logs/logs_docker_influxdb &
-                    wait 5
-                    echo -e "$green Influxdb image ✔ $neutre"
-                    ;;
-            "telegraf")
-                    echo -e "$yellow Building Telegraf image ... $neutre"
-                    docker build -t telegraf srcs/telegraf/. > ./logs/dockers_logs/logs_docker_telegraf &
-                    wait 5
-                    echo -e "$green Telegraf image ✔ $neutre"
-                    ;;
-            *)
-                    build nginx 
-                    build wordpress 
-                    build mysql 
-                    build php 
-                    build grafana 
-                    build influxdb
-                    build telegraf
-                    ;;
+    	"nginx")
+            echo -e "$yellow Building Nginx image ... $neutre"
+            docker build -t nginx srcs/nginx/. > ./logs/dockers_logs/logs_docker_nginx &
+            wait 5
+            echo -e "$green Nginx image ✔ $neutre"
+            ;;
+        "wordpress")
+            echo -e "$yellow Building Wordpress image ... $neutre"
+            docker build -t wordpress srcs/wordpress/. > ./logs/dockers_logs/logs_docker_wordpress &
+            wait 5
+            echo -e "$green Wordpress image ✔ $neutre"
+            ;;
+        "mysql")
+            echo -e "$yellow Building Mysql image ... $neutre"
+            docker build -t mysql srcs/mysql/. > ./logs/dockers_logs/logs_docker_mysql &
+            wait 5
+            echo -e "$green Mysql image ✔ $neutre"
+            ;;
+        "php")
+            echo -e "$yellow Building Phpmyadmin image ... $neutre"
+            docker build -t php srcs/phpmyadmin/. > ./logs/dockers_logs/logs_docker_php &
+            wait 5
+            echo -e "$green Phpmyadmin image ✔ $neutre"
+            ;;
+        "grafana")
+            echo -e "$yellow Building Grafana image ... $neutre"
+            docker build -t grafana srcs/grafana/. > ./logs/dockers_logs/logs_docker_grafana &
+            wait 5
+            echo -e "$green Grafana image ✔ $neutre"
+            ;;
+        "influxdb")
+            echo -e "$yellow Building Influxdb image ... $neutre"
+            docker build -t influxdb srcs/influxdb/. > ./logs/dockers_logs/logs_docker_influxdb &
+            wait 5
+            echo -e "$green Influxdb image ✔ $neutre"
+            ;;
+        "telegraf")
+            echo -e "$yellow Building Telegraf image ... $neutre"
+            docker build -t telegraf srcs/telegraf/. > ./logs/dockers_logs/logs_docker_telegraf &
+            wait 5
+            echo -e "$green Telegraf image ✔ $neutre"
+            ;;
+        "ftps")
+            echo -e "$yellow Building Ftps image ... $neutre"
+            docker build -t ftps srcs/ftps/. > ./logs/dockers_logs/logs_docker_ftps &
+            wait 5
+            echo -e "$green Ftps image ✔ $neutre"
+            ;;
+        *)
+            build nginx 
+            build wordpress 
+            build mysql 
+            build php 
+            build grafana 
+            build influxdb
+            build telegraf
+			build ftps
+            ;;
     esac
 }
 
@@ -193,6 +200,10 @@ delete()
                     kubectl delete -f srcs/kustomization/telegraf.yaml &> /dev/null
                     echo -e "$red ${bold}Telegraf.yaml deleted in Minikube ✗$neutre"
                     ;;
+            "ftps")
+                    kubectl delete -f srcs/kustomization/ftps.yaml &> /dev/null
+                    echo -e "$red ${bold}ftps.yaml deleted in Minikube ✗$neutre"
+                    ;;
         	"service")
                     kubectl delete -f srcs/kustomization/service.yaml &> /dev/null
                     echo -e "$red ${bold}Service.yaml deleted in Minikube ✗$neutre"
@@ -204,6 +215,7 @@ delete()
                     delete wordpress
                     delete php    
                     delete grafana
+					delete ftps
 		delete nginx
                     ;;
     esac

@@ -9,8 +9,7 @@ RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
 
 COPY ./grafana.sh .
 COPY default.ini /etc/default.ini
-RUN mkdir -p /usr/share/grafana/data
-COPY ./grafana.db /usr/share/grafana/data/grafana.db
+COPY ./grafana.db /grafana-6.7.2/data/grafana.db
 
 EXPOSE 3000
 ENTRYPOINT ["sh", "grafana.sh"]

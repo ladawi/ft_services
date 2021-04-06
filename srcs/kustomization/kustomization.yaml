@@ -11,3 +11,4 @@ resources:
 - grafana.yaml
 - phpmyadmin.yaml
 - wordpress.yaml
+- ftps.yaml

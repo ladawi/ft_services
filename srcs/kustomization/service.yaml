@@ -69,6 +69,17 @@ spec:
         ports:
           - containerPort: 5050
             name: wordpress
+      - image: ftps
+        imagePullPolicy: Never
+        name: ftps
+        env:
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+        ports:
+          - containerPort: 21
+            name: ftps
 
 ---
 
@@ -101,5 +112,9 @@ spec:
     targetPort: 5000
     protocol: TCP
     name: http-phpmyadmin
+  - port: 21
+    targetPort: 21
+    protocol: TCP
+    name: http-ftps
   selector:
     app: all

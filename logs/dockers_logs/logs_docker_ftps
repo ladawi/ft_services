@@ -1,0 +1,39 @@
+Sending build context to Docker daemon  5.632kB
+Step 1/11 : FROM alpine:3.11.3
+ ---> e7d92cdc71fe
+Step 2/11 : RUN apk update
+ ---> Using cache
+ ---> 0e35ff76bc32
+Step 3/11 : RUN apk -f add openrc
+ ---> Using cache
+ ---> e32a58d5f4ee
+Step 4/11 : RUN apk -f add vsftpd
+ ---> Using cache
+ ---> 85decc0d6ab3
+Step 5/11 : RUN apk add bash
+ ---> Using cache
+ ---> 2a61d6b8a0ed
+Step 6/11 : COPY ftps.sh .
+ ---> Using cache
+ ---> b331b6c6894d
+Step 7/11 : COPY vsftpd.conf /etc/vsftpd/.
+ ---> 9f96b80d3c6b
+Step 8/11 : RUN adduser --disabled-password --home etc/vsftpd/home ladawi &&     echo "ladawi:ladawi" | chpasswd
+ ---> Running in 918014a8b89d
+[91mchpasswd: password for 'ladawi' changed
+[0mRemoving intermediate container 918014a8b89d
+ ---> e38dcb5dd173
+Step 9/11 : RUN chown ladawi /
+ ---> Running in 6e017dad5f46
+Removing intermediate container 6e017dad5f46
+ ---> 69df7091b21d
+Step 10/11 : EXPOSE 21 40000
+ ---> Running in 9bcb6fdc3076
+Removing intermediate container 9bcb6fdc3076
+ ---> 8d0ba74a4347
+Step 11/11 : ENTRYPOINT ["sh", "ftps.sh"]
+ ---> Running in 178ddf39e555
+Removing intermediate container 178ddf39e555
+ ---> 2215faec119e
+Successfully built 2215faec119e
+Successfully tagged ftps:latest

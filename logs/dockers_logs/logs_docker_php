@@ -3,45 +3,45 @@ Step 1/15 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
 Step 2/15 : COPY ./init.sh .
  ---> Using cache
- ---> e59b5defe7af
+ ---> e2fdfb3552bc
 Step 3/15 : RUN apk update && apk upgrade
  ---> Using cache
- ---> ad3a2d3c74ec
+ ---> 5497c0a4e7b6
 Step 4/15 : RUN apk -f add nginx mariadb-server php7.3-fpm php-mysql wget
  ---> Using cache
- ---> c208c1a729cf
+ ---> 74df1e83563b
 Step 5/15 : RUN apk -f add php7-fpm php7-mbstring php7-session php7-mysqli php7-gettext 	php7-pdo php7-zip php7-sqlite3 php7-apcu php7-pdo_pgsql php7-bcmath php7-gd php7-odbc 	php7-pdo_mysql php7-pdo_sqlite php7-xmlreader php7-xmlrpc php7-bz2 php7-iconv php7-pdo_dblib 	php7-curl php7-ctype php7-mcrypt php7-soap php7-openssl php7-gmp php7-pdo_odbc php7-json php7-dom
  ---> Using cache
- ---> f2c0093f49df
+ ---> cf13f629ec4f
 Step 6/15 : RUN mkdir -p /var/www/html/localhost/phpmyadmin
  ---> Using cache
- ---> f5a45dd9239a
+ ---> 2e2728cb92ef
 Step 7/15 : RUN mkdir -p /run/php
  ---> Using cache
- ---> 5eecdbc1348e
+ ---> b5e6e8086221
 Step 8/15 : RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-english.tar.gz && tar -xvzf phpMyAdmin-4.9.0.1-english.tar.gz --strip-components=1 -C /var/www/html/localhost/phpmyadmin
  ---> Using cache
- ---> d20f92dc2cc3
+ ---> 03f857413438
 Step 9/15 : COPY ./config.inc.php /var/www/html/localhost/phpmyadmin/
  ---> Using cache
- ---> 15693c51e1be
+ ---> cd10745874f6
 Step 10/15 : RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/share/nginx/html
  ---> Using cache
- ---> 18df4fc6eacc
+ ---> 21c9905a1841
 Step 11/15 : COPY ./default.conf /etc/nginx/conf.d/.
  ---> Using cache
- ---> c13d66343fcd
+ ---> e120675b4438
 Step 12/15 : RUN mkdir -p /var/www/html/localhost/phpmyadmin/tmp
  ---> Using cache
- ---> 88174ab1bb90
+ ---> d2d2c0dac35f
 Step 13/15 : RUN chmod ugo+r /var/www/html/localhost/phpmyadmin/tmp
  ---> Using cache
- ---> 6c2dc26ea6bd
+ ---> 3d129e73f765
 Step 14/15 : EXPOSE 5000
  ---> Using cache
- ---> ea423845490c
+ ---> 28763c2446af
 Step 15/15 : ENTRYPOINT ["sh", "init.sh"]
  ---> Using cache
- ---> 4ec138276062
-Successfully built 4ec138276062
+ ---> 8fa26e45f2ca
+Successfully built 8fa26e45f2ca
 Successfully tagged php:latest
