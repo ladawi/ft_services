@@ -5,7 +5,7 @@ secret/mysql-pass-d2gtcm2t2k unchanged
 service/ftps created
 service/grafana unchanged
 service/influxdb unchanged
-service/mysql unchanged
+service/mysql created
 service/nginx unchanged
 service/phpmyadmin unchanged
 service/telegraf unchanged
@@ -13,7 +13,7 @@ service/wordpress unchanged
 deployment.apps/ftps created
 deployment.apps/grafana unchanged
 deployment.apps/influxdb unchanged
-deployment.apps/mysql unchanged
+deployment.apps/mysql created
 deployment.apps/nginx unchanged
 deployment.apps/phpmyadmin unchanged
 deployment.apps/telegraf unchanged

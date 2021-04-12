@@ -3,27 +3,27 @@ Step 1/9 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
 Step 2/9 : COPY init.sh .
  ---> Using cache
- ---> 462baa7ef2ac
+ ---> abfcbfeeb10b
 Step 3/9 : RUN apk add --update mysql mysql-client
  ---> Using cache
- ---> 0c4e92325afd
+ ---> c6b39a3eff41
 Step 4/9 : RUN mkdir -p app/mysql
  ---> Using cache
- ---> 8542878033b2
+ ---> 3ff8f516dd5e
 Step 5/9 : RUN mkdir auth_pam_tool_dir && mkdir auth_pam_tool_dir/auth_pam_tool
  ---> Using cache
- ---> 5426c6053b10
+ ---> a6fb247a2b25
 Step 6/9 : COPY my.cnf /etc/mysql/my.cnf
  ---> Using cache
- ---> 18ade53d40c4
+ ---> 781ff2e46757
 Step 7/9 : COPY my.cnf /etc/my.cnf
  ---> Using cache
- ---> dba3861511c1
+ ---> 1c5b7b7e58fa
 Step 8/9 : EXPOSE 3306
  ---> Using cache
- ---> ee35409d9cef
+ ---> 365633889c7c
 Step 9/9 : ENTRYPOINT ["sh", "init.sh"]
  ---> Using cache
- ---> 36c2a4e72cbf
-Successfully built 36c2a4e72cbf
+ ---> 2e1607ebce6d
+Successfully built 2e1607ebce6d
 Successfully tagged mysql:latest

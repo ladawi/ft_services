@@ -3,36 +3,36 @@ Step 1/12 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
 Step 2/12 : COPY ./init.sh .
  ---> Using cache
- ---> c3bcf162a736
+ ---> 91c92b5a3d2c
 Step 3/12 : RUN apk update && apk upgrade
  ---> Using cache
- ---> b1319d62646a
+ ---> 6cec13a31f5f
 Step 4/12 : RUN apk add nginx
  ---> Using cache
- ---> 775d38c34268
+ ---> 1cd77c8fd632
 Step 5/12 : RUN apk add bash
  ---> Using cache
- ---> 7fb7d17a349b
+ ---> 1e6204e5dcf5
 Step 6/12 : RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/share/nginx/html
  ---> Using cache
- ---> 6113ce0900ed
+ ---> 28e25315f165
 Step 7/12 : COPY ./default.conf /etc/nginx/conf.d/.
  ---> Using cache
- ---> 5a07d6483c17
+ ---> 714efc2927b3
 Step 8/12 : COPY index.html /usr/share/nginx/html/.
  ---> Using cache
- ---> 82ebbc2bd3c0
+ ---> 53e15dcd23eb
 Step 9/12 : COPY ssl_keys/ca.crt /etc/ssl/certs/ca.crt
  ---> Using cache
- ---> 7f6ed60691f8
+ ---> 70be473f46f8
 Step 10/12 : COPY ssl_keys/ca.key /etc/ssl/private/ca.key
  ---> Using cache
- ---> b26888e7418c
+ ---> e6e9c552c476
 Step 11/12 : EXPOSE 80 443
  ---> Using cache
- ---> f50f756890d8
+ ---> 525afe47586f
 Step 12/12 : ENTRYPOINT ["sh", "init.sh"]
  ---> Using cache
- ---> 5e003e3b1c37
-Successfully built 5e003e3b1c37
+ ---> 50071a94731e
+Successfully built 50071a94731e
 Successfully tagged nginx:latest

@@ -1,39 +1,57 @@
-Sending build context to Docker daemon  5.632kB
-Step 1/11 : FROM alpine:3.11.3
- ---> e7d92cdc71fe
-Step 2/11 : RUN apk update
+Sending build context to Docker daemon  6.144kB
+Step 1/18 : FROM alpine:3.13.2
+ ---> 28f6e2705743
+Step 2/18 : RUN apk update
  ---> Using cache
- ---> 0e35ff76bc32
-Step 3/11 : RUN apk -f add openrc
+ ---> 0ef496894566
+Step 3/18 : RUN apk add telegraf
  ---> Using cache
- ---> e32a58d5f4ee
-Step 4/11 : RUN apk -f add vsftpd
+ ---> 4607c5a5a0b9
+Step 4/18 : RUN apk add openrc
  ---> Using cache
- ---> 85decc0d6ab3
-Step 5/11 : RUN apk add bash
+ ---> 5df6bb033d99
+Step 5/18 : RUN apk add openssl
  ---> Using cache
- ---> 2a61d6b8a0ed
-Step 6/11 : COPY ftps.sh .
+ ---> 8d665021a94e
+Step 6/18 : RUN apk add vsftpd
  ---> Using cache
- ---> b331b6c6894d
-Step 7/11 : COPY vsftpd.conf /etc/vsftpd/.
- ---> 9f96b80d3c6b
-Step 8/11 : RUN adduser --disabled-password --home etc/vsftpd/home ladawi &&     echo "ladawi:ladawi" | chpasswd
- ---> Running in 918014a8b89d
-[91mchpasswd: password for 'ladawi' changed
-[0mRemoving intermediate container 918014a8b89d
- ---> e38dcb5dd173
-Step 9/11 : RUN chown ladawi /
- ---> Running in 6e017dad5f46
-Removing intermediate container 6e017dad5f46
- ---> 69df7091b21d
-Step 10/11 : EXPOSE 21 40000
- ---> Running in 9bcb6fdc3076
-Removing intermediate container 9bcb6fdc3076
- ---> 8d0ba74a4347
-Step 11/11 : ENTRYPOINT ["sh", "ftps.sh"]
- ---> Running in 178ddf39e555
-Removing intermediate container 178ddf39e555
- ---> 2215faec119e
-Successfully built 2215faec119e
+ ---> 71e725e21a4c
+Step 7/18 : RUN mkdir -p /run/openrc
+ ---> Using cache
+ ---> 5b80cdd81048
+Step 8/18 : RUN touch /run/openrc/softlevel
+ ---> Using cache
+ ---> 597e105f6e3e
+Step 9/18 : RUN openrc >/dev/null 2>&1
+ ---> Using cache
+ ---> fb5654b5ffab
+Step 10/18 : RUN apk add openssl
+ ---> Using cache
+ ---> 5ed401b4ebd7
+Step 11/18 : RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj '/C=FR/ST=75017/L=Paris/O=42/CN=localhost' -keyout /etc/ssl/private/key.pem -out /etc/ssl/certs/cert.pem >/dev/null 2>&1
+ ---> Using cache
+ ---> 9a2e0d4bb78f
+Step 12/18 : RUN adduser --disabled-password --home etc/vsftpd/home ladawi &&     echo "ladawi:ladawi" | chpasswd &&     echo 'I m a test file waiting to be transfered in the ft_service directory' >> etc/vsftpd/home/testfile2.txt
+ ---> Using cache
+ ---> 66ed5d3bfa50
+Step 13/18 : RUN chown ladawi /
+ ---> Using cache
+ ---> 8cea4a840dbc
+Step 14/18 : RUN chmod 766 /etc/vsftpd/home/testfile2.txt
+ ---> Running in 1cd108c6ade7
+Removing intermediate container 1cd108c6ade7
+ ---> 6ec4548aa7b1
+Step 15/18 : COPY vsftpd.conf /etc/vsftpd/
+ ---> 7df9c08717cb
+Step 16/18 : COPY start.sh /tmp/
+ ---> e3050c2889d0
+Step 17/18 : EXPOSE 21 4000
+ ---> Running in c9573e9e6c41
+Removing intermediate container c9573e9e6c41
+ ---> 95d1fbb765e1
+Step 18/18 : ENTRYPOINT sh tmp/start.sh
+ ---> Running in 41c7703c7c08
+Removing intermediate container 41c7703c7c08
+ ---> c0ed4e8e4f17
+Successfully built c0ed4e8e4f17
 Successfully tagged ftps:latest
