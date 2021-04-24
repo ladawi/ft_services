@@ -3,39 +3,39 @@ Step 1/13 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
 Step 2/13 : RUN apk -f upgrade && apk -f update
  ---> Using cache
- ---> 2dee3c8ebf9b
+ ---> e6a199598972
 Step 3/13 : RUN apk -f add wget tar
  ---> Using cache
- ---> 543b4c6bc5f7
+ ---> ed1bad36633a
 Step 4/13 : RUN mkdir -p /etc/telegraf
  ---> Using cache
- ---> 49a3a5877b90
+ ---> 5494a7f053b5
 Step 5/13 : RUN wget https://dl.influxdata.com/telegraf/releases/telegraf-1.15.2_linux_amd64.tar.gz && tar -zxf telegraf-1.15.2_linux_amd64.tar.gz && mv telegraf-1.15.2 telegraf && rm telegraf-1.15.2_linux_amd64.tar.gz
  ---> Using cache
- ---> eaaa83ef6b1e
+ ---> 91bfa6417fc9
 Step 6/13 : RUN cp -rf telegraf/etc/* /etc/
  ---> Using cache
- ---> ffedf0402ce1
+ ---> 14ff46d73303
 Step 7/13 : RUN cp -rf telegraf/usr/* /usr/
  ---> Using cache
- ---> 56620b44a468
+ ---> 27ecec831026
 Step 8/13 : RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
  ---> Using cache
- ---> 8a99370ae7e4
+ ---> 348a2ff45e4c
 Step 9/13 : RUN touch /var/run/utmp
  ---> Using cache
- ---> 6fa10002e419
+ ---> 6600d873bd3f
 Step 10/13 : COPY telegraf.conf /etc/telegraf/.
  ---> Using cache
- ---> 1cebb44d7074
+ ---> b0c8836a530c
 Step 11/13 : EXPOSE 35000
  ---> Using cache
- ---> f28c62e4cf9e
+ ---> 953ba24cd7e3
 Step 12/13 : COPY telegraf.sh .
  ---> Using cache
- ---> acb54b475483
+ ---> 66aa533dc276
 Step 13/13 : ENTRYPOINT ["sh", "telegraf.sh"]
  ---> Using cache
- ---> aec217603bf1
-Successfully built aec217603bf1
+ ---> a837da650c28
+Successfully built a837da650c28
 Successfully tagged telegraf:latest

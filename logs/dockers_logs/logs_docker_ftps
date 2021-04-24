@@ -3,54 +3,54 @@ Step 1/18 : FROM alpine:3.13.2
  ---> 28f6e2705743
 Step 2/18 : RUN apk update
  ---> Using cache
- ---> 0ef496894566
+ ---> 49d558c5beed
 Step 3/18 : RUN apk add telegraf
  ---> Using cache
- ---> 4607c5a5a0b9
+ ---> 0cf04f802cef
 Step 4/18 : RUN apk add openrc
  ---> Using cache
- ---> 5df6bb033d99
+ ---> 280cb206f518
 Step 5/18 : RUN apk add openssl
  ---> Using cache
- ---> 8d665021a94e
+ ---> f9c3fdad6d06
 Step 6/18 : RUN apk add vsftpd
  ---> Using cache
- ---> 71e725e21a4c
+ ---> 97a0f01fd0f9
 Step 7/18 : RUN mkdir -p /run/openrc
  ---> Using cache
- ---> 5b80cdd81048
+ ---> e79d2f78f6d8
 Step 8/18 : RUN touch /run/openrc/softlevel
  ---> Using cache
- ---> 597e105f6e3e
+ ---> 88ecd5bea357
 Step 9/18 : RUN openrc >/dev/null 2>&1
  ---> Using cache
- ---> fb5654b5ffab
+ ---> 4d8916e34451
 Step 10/18 : RUN apk add openssl
  ---> Using cache
- ---> 5ed401b4ebd7
+ ---> ee83d49a2ec5
 Step 11/18 : RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj '/C=FR/ST=75017/L=Paris/O=42/CN=localhost' -keyout /etc/ssl/private/key.pem -out /etc/ssl/certs/cert.pem >/dev/null 2>&1
  ---> Using cache
- ---> 9a2e0d4bb78f
+ ---> 9c69ab28f95f
 Step 12/18 : RUN adduser --disabled-password --home etc/vsftpd/home ladawi &&     echo "ladawi:ladawi" | chpasswd &&     echo 'I m a test file waiting to be transfered in the ft_service directory' >> etc/vsftpd/home/testfile2.txt
  ---> Using cache
- ---> 66ed5d3bfa50
+ ---> 88dd6462e5a6
 Step 13/18 : RUN chown ladawi /
  ---> Using cache
- ---> 8cea4a840dbc
+ ---> d773e76312b0
 Step 14/18 : RUN chmod 766 /etc/vsftpd/home/testfile2.txt
  ---> Using cache
- ---> 6ec4548aa7b1
+ ---> 4f040700a8c1
 Step 15/18 : COPY vsftpd.conf /etc/vsftpd/
  ---> Using cache
- ---> 7df9c08717cb
+ ---> 3c9f996d804e
 Step 16/18 : COPY start.sh /tmp/
  ---> Using cache
- ---> e3050c2889d0
+ ---> 2f931c8d2eca
 Step 17/18 : EXPOSE 21 4000
  ---> Using cache
- ---> 95d1fbb765e1
+ ---> 26a4654497f6
 Step 18/18 : ENTRYPOINT sh tmp/start.sh
  ---> Using cache
- ---> c0ed4e8e4f17
-Successfully built c0ed4e8e4f17
+ ---> 56555e213fdb
+Successfully built 56555e213fdb
 Successfully tagged ftps:latest

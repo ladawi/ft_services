@@ -3,51 +3,52 @@ Step 1/17 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
 Step 2/17 : COPY ./init.sh .
  ---> Using cache
- ---> 74ec15528a02
+ ---> 4db579aa2cb2
 Step 3/17 : RUN apk update && apk upgrade
  ---> Using cache
- ---> 75bf8e3a8ff6
+ ---> a45cfbc77b32
 Step 4/17 : RUN apk -f add nginx mariadb-server php7.3-fpm php-mysql wget
  ---> Using cache
- ---> 30b6c01f39df
+ ---> 31e121aa5868
 Step 5/17 : RUN apk -f add php7-fpm php7-mbstring php7-session php7-mysqli php7-gettext 	php7-pdo php7-zip php7-sqlite3 php7-apcu php7-pdo_pgsql php7-bcmath php7-gd php7-odbc 	php7-pdo_mysql php7-pdo_sqlite php7-xmlreader php7-xmlrpc php7-bz2 php7-iconv php7-pdo_dblib 	php7-curl php7-ctype php7-mcrypt php7-soap php7-openssl php7-gmp php7-pdo_odbc php7-json php7-dom
  ---> Using cache
- ---> 34adab61a228
+ ---> 7d33d6f06364
 Step 6/17 : RUN mkdir -p /var/www/html/localhost/phpmyadmin
  ---> Using cache
- ---> f64a01f99f78
+ ---> 027d0327230a
 Step 7/17 : RUN mkdir -p /run/php
  ---> Using cache
- ---> df5d1810a8a5
+ ---> ce074d7052aa
 Step 8/17 : RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-english.tar.gz && tar -xvzf phpMyAdmin-4.9.0.1-english.tar.gz --strip-components=1 -C /var/www/html/localhost/phpmyadmin
  ---> Using cache
- ---> d77b425ee938
+ ---> 68ec4104adf1
 Step 9/17 : COPY ./config.inc.php /var/www/html/localhost/phpmyadmin/
  ---> Using cache
- ---> a67bdb46c74f
+ ---> 5f5a1f5d0932
 Step 10/17 : RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/share/nginx/html
  ---> Using cache
- ---> 6786a5cf7ee8
+ ---> 09039ce6bf78
 Step 11/17 : COPY ./default.conf /etc/nginx/conf.d/.
- ---> Using cache
- ---> e8cd268006bc
+ ---> 5018c7df4f95
 Step 12/17 : RUN mkdir -p /var/www/html/localhost/phpmyadmin/tmp
- ---> Using cache
- ---> 8df2cc8db994
+ ---> Running in b18d3272fc56
+Removing intermediate container b18d3272fc56
+ ---> 46cf080c38db
 Step 13/17 : RUN chmod ugo+r /var/www/html/localhost/phpmyadmin/tmp
- ---> Using cache
- ---> 422d735b722e
+ ---> Running in 008ea00b28e9
+Removing intermediate container 008ea00b28e9
+ ---> e1fbbcbd0e68
 Step 14/17 : COPY ssl_keys/ca.crt /etc/ssl/certs/ca.crt
- ---> Using cache
- ---> 706e05416554
+ ---> 9a88297ee12b
 Step 15/17 : COPY ssl_keys/ca.key /etc/ssl/private/ca.key
- ---> Using cache
- ---> faaa455be7d6
+ ---> 3c24f77c6ab8
 Step 16/17 : EXPOSE 5000
- ---> Using cache
- ---> 06c674a36f2e
+ ---> Running in 321f21e0116b
+Removing intermediate container 321f21e0116b
+ ---> c7f3da714e4a
 Step 17/17 : ENTRYPOINT ["sh", "init.sh"]
- ---> Using cache
- ---> 52c3f3307bef
-Successfully built 52c3f3307bef
+ ---> Running in e611ee60c984
+Removing intermediate container e611ee60c984
+ ---> 1838cdf441be
+Successfully built 1838cdf441be
 Successfully tagged php:latest

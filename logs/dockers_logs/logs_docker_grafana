@@ -3,31 +3,31 @@ Step 1/10 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
 Step 2/10 : RUN apk -f upgrade && apk -f update
  ---> Using cache
- ---> 2dee3c8ebf9b
+ ---> e6a199598972
 Step 3/10 : RUN apk add openrc musl busybox
  ---> Using cache
- ---> 45a68cd78448
+ ---> 415e62d92a0c
 Step 4/10 : RUN wget https://dl.grafana.com/oss/release/grafana-6.7.2.linux-amd64.tar.gz && tar -zxvf grafana-6.7.2.linux-amd64.tar.gz
  ---> Using cache
- ---> 067b3f02ff23
+ ---> aed3fc9ff640
 Step 5/10 : RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
  ---> Using cache
- ---> 6817f72a50c8
+ ---> 2524d721f523
 Step 6/10 : COPY ./grafana.sh .
  ---> Using cache
- ---> 45e2aa6661e8
+ ---> dc46dfe271c4
 Step 7/10 : COPY default.ini /etc/default.ini
  ---> Using cache
- ---> 89428bec9c03
+ ---> 67ef8108d3e7
 Step 8/10 : COPY ./grafana.db /grafana-6.7.2/data/grafana.db
- ---> f55d03e0ec09
+ ---> a48b919284d9
 Step 9/10 : EXPOSE 3000
- ---> Running in a40c3c8bd367
-Removing intermediate container a40c3c8bd367
- ---> dd58458bccfd
+ ---> Running in 89a31d73fec9
+Removing intermediate container 89a31d73fec9
+ ---> 42b66bd5e090
 Step 10/10 : ENTRYPOINT ["sh", "grafana.sh"]
- ---> Running in 86ddecfe11c4
-Removing intermediate container 86ddecfe11c4
- ---> a1ba29a49fd9
-Successfully built a1ba29a49fd9
+ ---> Running in c4712f1a5dfe
+Removing intermediate container c4712f1a5dfe
+ ---> fc68894c374c
+Successfully built fc68894c374c
 Successfully tagged grafana:latest

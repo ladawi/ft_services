@@ -1,2 +1,2 @@
-    ▪ Using image k8s.gcr.io/metrics-server-amd64:v0.2.1
+    ▪ Using image k8s.gcr.io/metrics-server/metrics-server:v0.4.2
 🌟  The 'metrics-server' addon is enabled

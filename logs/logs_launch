@@ -1,16 +1,16 @@
-* minikube v1.18.1 sur Ubuntu 18.04
+* minikube v1.19.0 sur Ubuntu 18.04
 * Utilisation du pilote docker basé sur le profil existant
 * Démarrage du noeud de plan de contrôle minikube dans le cluster minikube
 * Restarting existing docker container for "minikube" ...
-* Préparation de Kubernetes v1.20.2 sur Docker 20.10.3...
+* Préparation de Kubernetes v1.20.2 sur Docker 20.10.5...
 * Verifying Kubernetes components...
-  - Using image gcr.io/k8s-minikube/storage-provisioner:v4
-  - Using image kubernetesui/metrics-scraper:v1.0.4
-  - Using image kubernetesui/dashboard:v2.1.0
-  - Using image k8s.gcr.io/metrics-server-amd64:v0.2.1
   - Using image metallb/speaker:v0.8.2
   - Using image metallb/controller:v0.8.2
-* Enabled addons: storage-provisioner, metrics-server, metallb, default-storageclass, dashboard
+  - Using image kubernetesui/dashboard:v2.1.0
+  - Using image k8s.gcr.io/metrics-server/metrics-server:v0.4.2
+  - Using image kubernetesui/metrics-scraper:v1.0.4
+  - Using image gcr.io/k8s-minikube/storage-provisioner:v5
+* Enabled addons: storage-provisioner, default-storageclass, metallb, metrics-server, dashboard
 
 ! /usr/local/bin/kubectl est la version 1.18.0, qui peut comporter des incompatibilités avec Kubernetes 1.20.2.
   - Want kubectl v1.20.2? Try 'minikube kubectl -- get pods -A'
