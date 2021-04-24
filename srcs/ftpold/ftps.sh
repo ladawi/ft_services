@@ -1,2 +1,0 @@
-echo "vsFTPd .x."
-vsftpd

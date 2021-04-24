@@ -27,7 +27,7 @@ spec:
             command:
             - /bin/sh
             - -c
-            - ps -o comm | grep 'telegraf' && ps -o comm | grep 'vsftpd'
+            - ps -o comm | grep 'vsftpd'
           initialDelaySeconds: 30
           periodSeconds: 10
 ---
@@ -37,7 +37,7 @@ kind: Service
 metadata:
   name: ftps
   annotations:
-    metallb.universe.tf/allow-shared-ip: shared
+    metallb.universe.tf/allow-shared-ip: sharing key
 spec:
   type: LoadBalancer
   selector:

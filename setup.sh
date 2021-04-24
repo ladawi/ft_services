@@ -59,7 +59,7 @@ start()
     echo -e "$yellow Docker ... $neutre"
     sudo service docker start
     echo -e "$green Docker ✔ $neutre"
-    minikube start --driver=$DRIVER &> logs/logs_launch &
+    minikube start  &> logs/logs_launch &
     echo -e "$yellow Minikube ... $neutre"
     wait 5
     echo -e "$green Minikube ✔ $neutre"
@@ -156,7 +156,7 @@ build()
             wait 5
             echo -e "$green Ftps image ✔ $neutre"
             ;;
-        *)
+        "all")
             build nginx 
             build wordpress 
             build mysql 
@@ -208,7 +208,7 @@ delete()
                     kubectl delete -f srcs/kustomization/service.yaml &> /dev/null
                     echo -e "$red ${bold}Service.yaml deleted in Minikube ✗$neutre"
                     ;;
-            *)
+            "all")
                     delete mysql
                     delete influxdb
                     delete telegraf
@@ -216,7 +216,7 @@ delete()
                     delete php    
                     delete grafana
 					delete ftps
-		delete nginx
+					delete nginx
                     ;;
     esac
 }
@@ -235,6 +235,7 @@ cleanlogs()
 	rm ./logs/dockers_logs/logs*
 	echo -e "${red} ${bold}💀 Removed logs 💀${neutre}"
 }
+
 set +e
 
 main ()

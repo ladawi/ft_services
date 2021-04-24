@@ -38,20 +38,19 @@ Step 13/18 : RUN chown ladawi /
  ---> Using cache
  ---> 8cea4a840dbc
 Step 14/18 : RUN chmod 766 /etc/vsftpd/home/testfile2.txt
- ---> Running in 1cd108c6ade7
-Removing intermediate container 1cd108c6ade7
+ ---> Using cache
  ---> 6ec4548aa7b1
 Step 15/18 : COPY vsftpd.conf /etc/vsftpd/
+ ---> Using cache
  ---> 7df9c08717cb
 Step 16/18 : COPY start.sh /tmp/
+ ---> Using cache
  ---> e3050c2889d0
 Step 17/18 : EXPOSE 21 4000
- ---> Running in c9573e9e6c41
-Removing intermediate container c9573e9e6c41
+ ---> Using cache
  ---> 95d1fbb765e1
 Step 18/18 : ENTRYPOINT sh tmp/start.sh
- ---> Running in 41c7703c7c08
-Removing intermediate container 41c7703c7c08
+ ---> Using cache
  ---> c0ed4e8e4f17
 Successfully built c0ed4e8e4f17
 Successfully tagged ftps:latest
