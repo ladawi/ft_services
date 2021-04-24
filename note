@@ -1,5 +1,5 @@
 (dans vm clean)
-- srcs + srcs
+- srcs + setup
 - exec setup.sh
 - minikube dashboard
 - kubectl get all
