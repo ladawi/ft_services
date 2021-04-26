@@ -1,8 +1,8 @@
 serviceaccount/telegraf-account unchanged
 clusterrolebinding.rbac.authorization.k8s.io/telegraf-account unchanged
-configmap/config configured
+configmap/config unchanged
 secret/mysql-pass-d2gtcm2t2k unchanged
-service/ftps configured
+service/ftps unchanged
 service/grafana unchanged
 service/influxdb unchanged
 service/mysql unchanged

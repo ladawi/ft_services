@@ -15,9 +15,6 @@ RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/share/nginx/
 RUN wget -c http://wordpress.org/latest.tar.gz && tar -xzvf latest.tar.gz
 RUN mkdir -p /var/www/html/localhost
 RUN mv wordpress /var/www/html/localhost
-RUN rm -rf /var/www/html/localhost/wordpress
-COPY ./wordpress-init /var/www/html/localhost/wordpress
-RUN chown -R 777 /var/www/html/localhost
 COPY wp-config.php /var/www/html/localhost/wp-config.php
 
 COPY wordpress.sql ./

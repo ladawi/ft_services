@@ -3,33 +3,33 @@ Step 1/11 : FROM alpine:3.11.3
  ---> e7d92cdc71fe
 Step 2/11 : RUN apk -f upgrade && apk -f update
  ---> Using cache
- ---> e6a199598972
+ ---> 305f1a1a3f9c
 Step 3/11 : RUN apk -f add wget
  ---> Using cache
- ---> 928ba3893129
+ ---> 293d65c8cac1
 Step 4/11 : RUN apk add influxdb --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/community
  ---> Using cache
- ---> f71dbdb18641
+ ---> 51d8adea25ac
 Step 5/11 : COPY ./influx.sh .
  ---> Using cache
- ---> 619bb6f04201
+ ---> 663aee0133ea
 Step 6/11 : COPY ./database.influx .
  ---> Using cache
- ---> 1d1751daa313
+ ---> bfa4a4743026
 Step 7/11 : COPY influxdb.conf /etc/influxdb/.
  ---> Using cache
- ---> 10da3bcd5fdd
+ ---> 47ab1387f945
 Step 8/11 : RUN mkdir -p app/influxdb
  ---> Using cache
- ---> ed95015ab648
+ ---> fc5907f76548
 Step 9/11 : RUN mkdir /opt/collectd && mkdir /opt/collectd/share && mkdir /opt/collectd/share/collectd && cd /opt/collectd/share/collectd && wget https://raw.githubusercontent.com/collectd/collectd/master/src/types.db && cd -
  ---> Using cache
- ---> 761d25a668b7
+ ---> 7ecd3bcea578
 Step 10/11 : EXPOSE 8086
  ---> Using cache
- ---> e6ba06988a7a
+ ---> 434ecedf51e6
 Step 11/11 : ENTRYPOINT ["sh", "influx.sh"]
  ---> Using cache
- ---> c2911a7f7950
-Successfully built c2911a7f7950
+ ---> bbf69937bf38
+Successfully built bbf69937bf38
 Successfully tagged influxdb:latest
