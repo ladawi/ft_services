@@ -11,7 +11,7 @@ mysql -h $WORDPRESS_DB_HOST -u $WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD -se'U
 if [ $? == 1 ]; then
 	echo "Database wordpress not found, creating it"
 	mysql -h $WORDPRESS_DB_HOST -u $WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD -se'CREATE DATABASE IF NOT EXISTS wordpress;'
-	mysql -h $WORDPRESS_DB_HOST -u $WORDPRESS_DB_USER -p $WORDPRESS_DB_PASSWORD wordpress < /wordpress.sql;
+	mysql -h $WORDPRESS_DB_HOST -u $WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD wordpress < /wordpress.sql;
 	echo "Database created and tables imported"
 fi
 

@@ -48,7 +48,7 @@ progress_bar() {
 apply()
 {
     echo -e "$yellow Kustomization file ... $neutre"
-    kubectl apply -k srcs/kustomization &> ./logs/logs_kubectl_apply &
+    kubectl apply -k srcs/kustomization &> ./srcs/logs/logs_kubectl_apply &
     wait 5
     echo -e "$green Kustomization file ✔ $neutre"
 }
@@ -56,26 +56,29 @@ apply()
 start()
 {
 	cleanlogs
+    createlogs
     echo -e "$yellow Docker ... $neutre"
     sudo service docker start
     echo -e "$green Docker ✔ $neutre"
-    minikube start  &> logs/logs_launch &
+    minikube start  &> srcs/logs/logs_launch &
     echo -e "$yellow Minikube ... $neutre"
     wait 5
     echo -e "$green Minikube ✔ $neutre"
-    minikube addons enable metallb &> logs/logs_metallb &
+    minikube addons enable metallb &> srcs/logs/logs_metallb &
     echo -e "$yellow metallb ... $neutre"
     wait 5
     echo -e "$green Metallb ✔ $neutre"
-    minikube addons enable metrics-server > logs/logs_metrics-server &
+    minikube addons enable metrics-server > srcs/logs/logs_metrics-server &
     echo -e "$yellow Metrics-server ... $neutre"
     wait 5
     echo -e "$green Metrics-server ✔ $neutre"
-    echo -e "$yellow Dashboard ... $neutre"
-    minikube dashboard &> logs/logs_dashboard &
-    echo -e "$green Dashboard Running ... $neutre"
     build all
+    wait 5
     apply
+    wait 5
+    echo -e "$yellow Dashboard ... $neutre"
+    minikube dashboard &> srcs/logs/logs_dashboard &
+    echo -e "$green Dashboard Running ... $neutre"
 }
 
 stop()
@@ -86,8 +89,8 @@ stop()
     sudo service nginx stop
     wait 5
     echo -e "$red ${bold}nginx stopped 💀$neutre"
-    minikube stop &> logs/logs_minikube_stop &
-    minikube delete &> logs/logs_minikube_del &
+    minikube stop &> srcs/logs/logs_minikube_stop &
+    minikube delete &> srcs/logs/logs_minikube_del &
     wait 15
     echo -e "$red ${bold}Minikube stopped 💀$neutre"
 }
@@ -110,49 +113,49 @@ build()
     case $1 in
     	"nginx")
             echo -e "$yellow Building Nginx image ... $neutre"
-            docker build -t nginx srcs/nginx/. > ./logs/dockers_logs/logs_docker_nginx &
+            docker build -t nginx srcs/nginx/. > ./srcs/logs/dockers_logs/logs_docker_nginx &
             wait 5
             echo -e "$green Nginx image ✔ $neutre"
             ;;
         "wordpress")
             echo -e "$yellow Building Wordpress image ... $neutre"
-            docker build -t wordpress srcs/wordpress/. > ./logs/dockers_logs/logs_docker_wordpress &
+            docker build -t wordpress srcs/wordpress/. > ./srcs/logs/dockers_logs/logs_docker_wordpress &
             wait 5
             echo -e "$green Wordpress image ✔ $neutre"
             ;;
         "mysql")
             echo -e "$yellow Building Mysql image ... $neutre"
-            docker build -t mysql srcs/mysql/. > ./logs/dockers_logs/logs_docker_mysql &
+            docker build -t mysql srcs/mysql/. > ./srcs/logs/dockers_logs/logs_docker_mysql &
             wait 5
             echo -e "$green Mysql image ✔ $neutre"
             ;;
         "php")
             echo -e "$yellow Building Phpmyadmin image ... $neutre"
-            docker build -t php srcs/phpmyadmin/. > ./logs/dockers_logs/logs_docker_php &
+            docker build -t php srcs/phpmyadmin/. > ./srcs/logs/dockers_logs/logs_docker_php &
             wait 5
             echo -e "$green Phpmyadmin image ✔ $neutre"
             ;;
         "grafana")
             echo -e "$yellow Building Grafana image ... $neutre"
-            docker build -t grafana srcs/grafana/. > ./logs/dockers_logs/logs_docker_grafana &
+            docker build -t grafana srcs/grafana/. > ./srcs/logs/dockers_logs/logs_docker_grafana &
             wait 5
             echo -e "$green Grafana image ✔ $neutre"
             ;;
         "influxdb")
             echo -e "$yellow Building Influxdb image ... $neutre"
-            docker build -t influxdb srcs/influxdb/. > ./logs/dockers_logs/logs_docker_influxdb &
+            docker build -t influxdb srcs/influxdb/. > ./srcs/logs/dockers_logs/logs_docker_influxdb &
             wait 5
             echo -e "$green Influxdb image ✔ $neutre"
             ;;
         "telegraf")
             echo -e "$yellow Building Telegraf image ... $neutre"
-            docker build -t telegraf srcs/telegraf/. > ./logs/dockers_logs/logs_docker_telegraf &
+            docker build -t telegraf srcs/telegraf/. > ./srcs/logs/dockers_logs/logs_docker_telegraf &
             wait 5
             echo -e "$green Telegraf image ✔ $neutre"
             ;;
         "ftps")
             echo -e "$yellow Building Ftps image ... $neutre"
-            docker build -t ftps srcs/ftps/. > ./logs/dockers_logs/logs_docker_ftps &
+            docker build -t ftps srcs/ftps/. > ./srcs/logs/dockers_logs/logs_docker_ftps &
             wait 5
             echo -e "$green Ftps image ✔ $neutre"
             ;;
@@ -172,51 +175,51 @@ build()
 delete()
 {
     case $1 in
-            "nginx")
+                "nginx")
                     kubectl delete -f srcs/kustomization/nginx.yaml &> /dev/null
                     echo -e "$red ${bold}Nginx.yaml deleted in Minikube ✗$neutre"
                     ;;
-            "wordpress")
+                "wordpress")
                     kubectl delete -f srcs/kustomization/wordpress.yaml &> /dev/null
                     echo -e "$red ${bold}Wordpress.yaml deleted in Minikube ✗$neutre"
                     ;;
-            "mysql")
+                "mysql")
                     kubectl delete -f srcs/kustomization/mysql.yaml &> /dev/null
                     echo -e "$red ${bold}Mysql.yaml deleted in Minikube ✗$neutre"
                     ;;
-            "php")
+                "php")
                     kubectl delete -f srcs/kustomization/phpmyadmin.yaml &> /dev/null
                     echo -e "$red ${bold}Phpmyadmin.yaml deleted in Minikube ✗$neutre"
                     ;;
-            "grafana")
+                "grafana")
                     kubectl delete -f srcs/kustomization/grafana.yaml &> /dev/null
                     echo -e "$red ${bold}Grafana.yaml deleted in Minikube ✗$neutre"
                     ;;
-            "influxdb")
+                "influxdb")
                     kubectl delete -f srcs/kustomization/influxdb.yaml &> /dev/null
                     echo -e "$red ${bold}Influxdb.yaml deleted in Minikube ✗$neutre"
                     ;;
-            "telegraf")
+                "telegraf")
                     kubectl delete -f srcs/kustomization/telegraf.yaml &> /dev/null
                     echo -e "$red ${bold}Telegraf.yaml deleted in Minikube ✗$neutre"
                     ;;
-            "ftps")
+                "ftps")
                     kubectl delete -f srcs/kustomization/ftps.yaml &> /dev/null
                     echo -e "$red ${bold}ftps.yaml deleted in Minikube ✗$neutre"
                     ;;
-        	"service")
+                "service")
                     kubectl delete -f srcs/kustomization/service.yaml &> /dev/null
                     echo -e "$red ${bold}Service.yaml deleted in Minikube ✗$neutre"
                     ;;
-            "all")
+                "all")
                     delete mysql
                     delete influxdb
                     delete telegraf
                     delete wordpress
                     delete php    
                     delete grafana
-					delete ftps
-					delete nginx
+                    delete ftps
+                    delete nginx
                     ;;
     esac
 }
@@ -231,10 +234,17 @@ minikubeip()
 
 cleanlogs()
 {
-	rm ./logs/logs_*
-	rm ./logs/dockers_logs/logs*
+	rm -rf ./srcs/logs
 	echo -e "${red} ${bold}💀 Removed logs 💀${neutre}"
 }
+
+createlogs()
+{
+	mkdir ./srcs/logs
+	mkdir ./srcs/logs/dockers_logs
+	echo -e "${green} ${bold}✔ Created logs ✔${neutre}"
+}
+
 
 set +e
 
@@ -249,7 +259,7 @@ main ()
                     ;;
             "restart")
                     stop
-                    del
+                    delete
                     start
                     ;;
             "prune")
@@ -275,6 +285,9 @@ main ()
             "cleanlogs")
                     cleanlogs
                     ;;
+            "createlogs")
+                    cleanlogs
+                    ;;
             *)
                 echo -e "List of commands :"
                 echo -e "-- start"
@@ -287,6 +300,7 @@ main ()
                 echo -e '-- update $2'
                 echo -e '-- minikubeip'
                 echo -e '-- cleanlogs'
+                echo -e '-- createlogs'
     esac
 }
 
