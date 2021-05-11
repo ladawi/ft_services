@@ -5,13 +5,16 @@ metadata:
   labels:
     app: ft_services
 spec:
+  type: ClusterIP
   ports:
   - port: 8086
     targetPort: 8086
   selector:
     app: ft_services
     tier: influxdb
+
 ---
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -23,8 +26,10 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 500Mi
+
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -49,13 +54,25 @@ spec:
       - image: influxdb
         imagePullPolicy: Never
         name: influxdb
+        env:
+        - name: INFLUXDB_HOST
+          value: influxdb
+        - name: INFLUXDB_USER
+          value: root
+        - name: INFLUXDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+        - name: INFLUXDB_DATABASE
+          value: influxdb
         ports:
         - containerPort: 8086
           name: influxdb
         volumeMounts:
-          - name: influx-persistent-storage
-            mountPath: /var/lib/influxdb
+          - name: influxdb-persistent-storage
+            mountPath: /app/influxdb
       volumes:
-      - name: influx-persistent-storage
+      - name: influxdb-persistent-storage
         persistentVolumeClaim:
           claimName: influxdb-pv-claim
