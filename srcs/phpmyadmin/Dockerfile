@@ -21,10 +21,10 @@ RUN mkdir /run/nginx && touch /run/nginx/nginx.pid && mkdir -p /usr/share/nginx/
 COPY ./default.conf /etc/nginx/conf.d/.
 RUN mkdir -p /var/www/html/localhost/phpmyadmin/tmp
 RUN chmod ugo+r /var/www/html/localhost/phpmyadmin/tmp
-
+RUN chmod 777 /var/www/html/localhost/phpmyadmin
 COPY ssl_keys/ca.crt /etc/ssl/certs/ca.crt
 COPY ssl_keys/ca.key /etc/ssl/private/ca.key
 
-EXPOSE 5000
+EXPOSE 5000 80
 
 ENTRYPOINT ["sh", "init.sh"]

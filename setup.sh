@@ -24,25 +24,8 @@ wait()
 {
     pid=$!
 	while kill -0 $pid 2> /dev/null; do
-	    progress_bar $1
+	    sleep $1
 	done
-}
-
-progress_bar() {
-  local duration=${1}
-
-
-    already_done() { for ((done=0; done<$elapsed; done++)); do printf "▇"; done }
-    remaining() { for ((remain=$elapsed; remain<$duration; remain++)); do printf " "; done }
-    percentage() { printf "| " $(( (($elapsed)*100)/($duration)*100/100 )); }
-    clean_line() { echo -en "\033[1K\r"; }
-
-  for (( elapsed=1; elapsed<=$duration; elapsed++ )); do
-      already_done; remaining; percentage
-      sleep 1
-      clean_line
-  done
-  clean_line
 }
 
 apply()
