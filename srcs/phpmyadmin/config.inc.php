@@ -20,7 +20,6 @@ $cfg['blowfish_secret'] = 'thisneedtobethirtytwocaractslong'; /* YOU MUST FILL I
  * Servers configuration
  */
 $i = 0;
-$cfg['ForceSSL'] = true;
 /**
  * First server
  */
@@ -31,7 +30,6 @@ $cfg['Servers'][$i]['auth_type'] = 'cookie';
 $cfg['Servers'][$i]['host'] = mysql;
 $cfg['Servers'][$i]['compress'] = false;
 $cfg['Servers'][$i]['AllowNoPassword'] = true;
-
 /**
  * phpMyAdmin configuration storage settings.
  */
