@@ -36,6 +36,11 @@ apply()
     echo -e "$green Kustomization file ✔ $neutre"
 }
 
+init()
+{
+    sudo usermod -aG docker $USER && newgrp docker
+}
+
 start()
 {
 	cleanlogs
@@ -240,6 +245,9 @@ main ()
             "stop")
                     stop
                     ;;
+            "init")
+                    init
+                    ;;
             "restart")
                     stop
                     delete
@@ -275,6 +283,7 @@ main ()
                 echo -e "List of commands :"
                 echo -e "-- start"
                 echo -e "-- stop"
+                echo -e "-- init"
                 echo -e "-- restart"
                 echo -e "-- prune"
                 echo -e "-- build"
